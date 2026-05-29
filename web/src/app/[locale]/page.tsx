@@ -24,7 +24,9 @@ function toPositiveInt(value: string | string[] | undefined): number | undefined
 export async function generateMetadata({ params }: HomePageProps): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: 'Nav' });
-  return { title: t('home') };
+  // The home page shares the `[locale]` segment with the layout, so the
+  // layout's title template doesn't apply here — build the full title.
+  return { title: { absolute: `The Spot | ${t('home')}` } };
 }
 
 export default async function HomePage({ params, searchParams }: HomePageProps) {
