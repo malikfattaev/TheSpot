@@ -1,17 +1,44 @@
+import type { Metadata } from 'next';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { ListingCard } from '@/components/listing-card';
+import { ListingsFilter } from '@/components/listings-filter';
 import { SearchBar } from '@/components/search-bar';
 import { getPublishedListings } from '@/lib/data/listings';
 
+type SearchParams = Record<string, string | string[] | undefined>;
+
 type HomePageProps = {
   params: Promise<{ locale: string }>;
+  searchParams: Promise<SearchParams>;
 };
 
-export default async function HomePage({ params }: HomePageProps) {
+function firstValue(value: string | string[] | undefined): string | undefined {
+  return Array.isArray(value) ? value[0] : value;
+}
+
+function toPositiveInt(value: string | string[] | undefined): number | undefined {
+  const parsed = Number(firstValue(value));
+  return Number.isFinite(parsed) && parsed > 0 ? parsed : undefined;
+}
+
+export async function generateMetadata({ params }: HomePageProps): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: 'Nav' });
+  return { title: t('home') };
+}
+
+export default async function HomePage({ params, searchParams }: HomePageProps) {
   const { locale } = await params;
   setRequestLocale(locale);
   const t = await getTranslations('Home');
-  const listings = await getPublishedListings();
+
+  const sp = await searchParams;
+  const district = firstValue(sp.district)?.trim();
+  const listings = await getPublishedListings({
+    rooms: toPositiveInt(sp.rooms),
+    district: district || undefined,
+    maxPrice: toPositiveInt(sp.maxPrice),
+  });
 
   return (
     <section className="container py-10 sm:py-14">
@@ -19,12 +46,13 @@ export default async function HomePage({ params }: HomePageProps) {
         <SearchBar />
       </div>
 
-      <h2
-        className="animate-fade-up mt-12 text-xl font-semibold tracking-tight"
+      <div
+        className="animate-fade-up mt-12 flex flex-wrap items-center justify-between gap-3"
         style={{ animationDelay: '80ms' }}
       >
-        {t('title')}
-      </h2>
+        <h2 className="text-xl font-semibold tracking-tight">{t('title')}</h2>
+        <ListingsFilter />
+      </div>
 
       {listings.length === 0 ? (
         <div

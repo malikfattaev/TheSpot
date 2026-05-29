@@ -1,8 +1,15 @@
+import type { Metadata } from 'next';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 
 type ProfileListingsPageProps = {
   params: Promise<{ locale: string }>;
 };
+
+export async function generateMetadata({ params }: ProfileListingsPageProps): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: 'Profile' });
+  return { title: t('myListings') };
+}
 
 export default async function ProfileListingsPage({ params }: ProfileListingsPageProps) {
   const { locale } = await params;

@@ -1,3 +1,4 @@
+import type { Metadata } from 'next';
 import { BadgeCheck, HandCoins, Search } from 'lucide-react';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { buttonVariants } from '@/components/ui/button';
@@ -6,6 +7,12 @@ import { Link } from '@/i18n/navigation';
 type AboutPageProps = {
   params: Promise<{ locale: string }>;
 };
+
+export async function generateMetadata({ params }: AboutPageProps): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: 'Nav' });
+  return { title: t('about') };
+}
 
 const features = [
   { key: 'search', icon: Search },

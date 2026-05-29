@@ -33,7 +33,11 @@ export async function generateMetadata({
 
   return {
     metadataBase: new URL(env.NEXT_PUBLIC_SITE_URL),
-    title: t('title'),
+    title: {
+      // Pages set their own title; it renders as "The Spot | <page>".
+      default: t('title'),
+      template: 'The Spot | %s',
+    },
     description: t('description'),
   };
 }
