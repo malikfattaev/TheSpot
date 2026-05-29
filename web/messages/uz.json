@@ -1,0 +1,34 @@
+{
+  "Metadata": {
+    "title": "The Spot — O‘zbekistonda ko‘chmas mulk ijarasi",
+    "description": "O‘zbekiston bo‘ylab kvartira ijarasi e’lonlarini topish va joylash."
+  },
+  "Nav": {
+    "home": "Bosh sahifa",
+    "listings": "E’lonlar",
+    "postListing": "E’lon joylash",
+    "login": "Kirish"
+  },
+  "Home": {
+    "heroTitle": "O‘z joyingizni toping",
+    "heroSubtitle": "O‘zbekiston bo‘ylab kvartira ijarasi — tez, qulay va vositachilarsiz.",
+    "ctaBrowse": "E’lonlarni ko‘rish",
+    "ctaPost": "Uy joylash"
+  },
+  "Listings": {
+    "title": "E’lonlar",
+    "empty": "Hozircha e’lonlar yo‘q. Keyinroq qarang."
+  },
+  "PostListing": {
+    "title": "E’lon joylash",
+    "subtitle": "Uy joylash formasi shu yerda paydo bo‘ladi. Uy egalari uchun mavjud."
+  },
+  "LocaleSwitcher": {
+    "label": "Til",
+    "ru": "Русский",
+    "uz": "O‘zbek"
+  },
+  "Footer": {
+    "rights": "Barcha huquqlar himoyalangan."
+  }
+}
