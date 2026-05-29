@@ -14,7 +14,19 @@
       "Bash(git init *)",
       "Bash(git branch *)",
       "Bash(git add *)",
-      "Bash(git -c user.email=diyorkhaydarov28@gmail.com -c user.name=malikfattaev commit -q -m ' *)"
+      "Bash(git -c user.email=diyorkhaydarov28@gmail.com -c user.name=malikfattaev commit -q -m ' *)",
+      "Bash(git remote *)",
+      "Bash(git push *)",
+      "Bash(break)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code} -> %{redirect_url}\\\\n\" http://localhost:3000/)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" http://localhost:3000/ru)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" http://localhost:3000/uz)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" http://localhost:3001/)",
+      "Bash(curl -s -o /dev/null -w \"web /ru: %{http_code}\\\\n\" http://localhost:3000/ru)",
+      "Bash(curl -s -o /dev/null -w \"web /uz: %{http_code}\\\\n\" http://localhost:3000/uz)",
+      "Bash(pkill -f \"next dev\")",
+      "Bash(pkill -f \"turbo run dev\")",
+      "Bash(curl -s -o /dev/null -w \"erp /: %{http_code}\\\\n\" http://localhost:3001/)"
     ]
   }
 }

@@ -4,66 +4,93 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222 47% 11%;
+    /* Surfaces — deep indigo night with cozy pastel glows. */
+    --background: 244 34% 9%;
+    --foreground: 250 40% 96%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 222 47% 11%;
+    --card: 245 30% 14%;
+    --card-foreground: 250 40% 96%;
 
-    --primary: 221 83% 53%;
-    --primary-foreground: 210 40% 98%;
+    /* Brand */
+    --primary: 256 85% 76%;
+    --primary-foreground: 245 45% 12%;
 
-    --secondary: 210 40% 96%;
-    --secondary-foreground: 222 47% 11%;
+    --secondary: 245 25% 18%;
+    --secondary-foreground: 250 40% 96%;
 
-    --muted: 210 40% 96%;
-    --muted-foreground: 215 16% 47%;
+    --muted: 245 22% 17%;
+    --muted-foreground: 250 18% 68%;
 
-    --accent: 210 40% 96%;
-    --accent-foreground: 222 47% 11%;
+    --accent: 245 28% 20%;
+    --accent-foreground: 250 40% 96%;
 
-    --destructive: 0 84% 60%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 351 80% 68%;
+    --destructive-foreground: 0 0% 100%;
 
-    --border: 214 32% 91%;
-    --input: 214 32% 91%;
-    --ring: 221 83% 53%;
+    --border: 250 22% 24%;
+    --input: 250 22% 24%;
+    --ring: 256 85% 76%;
 
-    --radius: 0.625rem;
-  }
+    --radius: 1rem;
+    --shadow-color: 245 60% 3%;
 
-  .dark {
-    --background: 222 47% 11%;
-    --foreground: 210 40% 98%;
-
-    --card: 222 47% 13%;
-    --card-foreground: 210 40% 98%;
-
-    --primary: 217 91% 60%;
-    --primary-foreground: 222 47% 11%;
-
-    --secondary: 217 33% 18%;
-    --secondary-foreground: 210 40% 98%;
-
-    --muted: 217 33% 18%;
-    --muted-foreground: 215 20% 65%;
-
-    --accent: 217 33% 18%;
-    --accent-foreground: 210 40% 98%;
-
-    --destructive: 0 63% 31%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 217 33% 20%;
-    --input: 217 33% 20%;
-    --ring: 217 91% 60%;
+    /* Pastel gradient palette — vivid enough to glow on a dark canvas. */
+    --grad-violet: 262 92% 76%;
+    --grad-indigo: 234 90% 76%;
+    --grad-sky: 200 95% 74%;
+    --grad-mint: 162 76% 70%;
+    --grad-peach: 28 100% 76%;
+    --grad-pink: 328 92% 78%;
   }
 
   * {
     @apply border-border;
   }
 
+  html {
+    scroll-behavior: smooth;
+  }
+
   body {
     @apply bg-background text-foreground antialiased;
+    background-image:
+      radial-gradient(55rem 55rem at 6% -12%, hsl(var(--grad-violet) / 0.22), transparent 60%),
+      radial-gradient(48rem 48rem at 100% -6%, hsl(var(--grad-sky) / 0.2), transparent 60%),
+      radial-gradient(42rem 42rem at 50% 116%, hsl(var(--grad-pink) / 0.16), transparent 60%),
+      radial-gradient(38rem 38rem at 92% 104%, hsl(var(--grad-peach) / 0.12), transparent 60%);
+    background-attachment: fixed;
+  }
+}
+
+@layer components {
+  /* Frosted-glass surface used by the header, cards and controls. */
+  .glass {
+    background-color: hsl(250 40% 96% / 0.05);
+    backdrop-filter: blur(18px) saturate(150%);
+    -webkit-backdrop-filter: blur(18px) saturate(150%);
+    border: 1px solid hsl(250 60% 92% / 0.12);
+  }
+
+  /* Brand gradient fill for buttons and accents. */
+  .bg-brand {
+    background-image: linear-gradient(
+      120deg,
+      hsl(var(--grad-violet)),
+      hsl(var(--grad-indigo)),
+      hsl(var(--grad-sky))
+    );
+  }
+
+  /* Gradient clipped to text — bright pastel that pops against the dark canvas. */
+  .text-gradient {
+    background-image: linear-gradient(
+      110deg,
+      hsl(var(--grad-violet)),
+      hsl(var(--grad-indigo)),
+      hsl(var(--grad-sky))
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
   }
 }

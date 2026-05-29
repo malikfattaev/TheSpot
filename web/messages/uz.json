@@ -10,10 +10,25 @@
     "login": "Kirish"
   },
   "Home": {
+    "badge": "Ko‘chmas mulk — yangicha",
     "heroTitle": "O‘z joyingizni toping",
     "heroSubtitle": "O‘zbekiston bo‘ylab kvartira ijarasi — tez, qulay va vositachilarsiz.",
     "ctaBrowse": "E’lonlarni ko‘rish",
-    "ctaPost": "Uy joylash"
+    "ctaPost": "Uy joylash",
+    "features": {
+      "search": {
+        "title": "Aqlli qidiruv",
+        "description": "Shahar, narx va xonalar soni bo‘yicha filtrlar."
+      },
+      "verified": {
+        "title": "Tasdiqlangan egalar",
+        "description": "E’lonlar haqiqiy uy egalaridan."
+      },
+      "noFee": {
+        "title": "Vositachilarsiz",
+        "description": "Yashirin to‘lovlar va ortiqcha xarajatlarsiz."
+      }
+    }
   },
   "Listings": {
     "title": "E’lonlar",
@@ -27,8 +42,5 @@
     "label": "Til",
     "ru": "Русский",
     "uz": "O‘zbek"
-  },
-  "Footer": {
-    "rights": "Barcha huquqlar himoyalangan."
   }
 }

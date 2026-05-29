@@ -10,9 +10,13 @@ export default async function NewListingPage({ params }: NewListingPageProps) {
   const t = await getTranslations('PostListing');
 
   return (
-    <section className="container py-16">
-      <h1 className="text-3xl font-bold tracking-tight">{t('title')}</h1>
-      <p className="mt-4 max-w-xl text-muted-foreground">{t('subtitle')}</p>
+    <section className="container py-20">
+      <h1 className="animate-fade-up text-3xl font-extrabold tracking-tight sm:text-4xl">
+        {t('title')}
+      </h1>
+      <div className="glass animate-fade-up mt-8 max-w-xl rounded-3xl p-10 text-muted-foreground shadow-glass">
+        {t('subtitle')}
+      </div>
     </section>
   );
 }

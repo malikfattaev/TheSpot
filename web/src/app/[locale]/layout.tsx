@@ -1,12 +1,18 @@
 import type { Metadata } from 'next';
+import { Manrope } from 'next/font/google';
 import { notFound } from 'next/navigation';
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages, getTranslations, setRequestLocale } from 'next-intl/server';
-import { SiteFooter } from '@/components/site-footer';
 import { SiteHeader } from '@/components/site-header';
 import { routing, type Locale } from '@/i18n/routing';
 import { env } from '@/lib/env';
 import '../globals.css';
+
+const fontSans = Manrope({
+  subsets: ['latin', 'cyrillic'],
+  variable: '--font-sans',
+  display: 'swap',
+});
 
 type LocaleLayoutProps = {
   children: React.ReactNode;
@@ -43,12 +49,11 @@ export default async function LocaleLayout({ children, params }: LocaleLayoutPro
   const messages = await getMessages();
 
   return (
-    <html lang={locale} suppressHydrationWarning>
-      <body className="flex min-h-screen flex-col">
+    <html lang={locale} className={fontSans.variable} suppressHydrationWarning>
+      <body className="flex min-h-screen flex-col font-sans">
         <NextIntlClientProvider messages={messages}>
           <SiteHeader />
           <main className="flex-1">{children}</main>
-          <SiteFooter />
         </NextIntlClientProvider>
       </body>
     </html>
