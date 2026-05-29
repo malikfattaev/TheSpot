@@ -14,14 +14,14 @@ const fieldClass =
 export function SearchBar() {
   const t = useTranslations('Search');
   const router = useRouter();
-  const [location, setLocation] = useState('');
+  const [district, setDistrict] = useState('');
   const [rooms, setRooms] = useState('');
   const [maxPrice, setMaxPrice] = useState('');
 
   function handleSubmit(event: FormEvent) {
     event.preventDefault();
     const params = new URLSearchParams();
-    if (location.trim()) params.set('city', location.trim());
+    if (district.trim()) params.set('district', district.trim());
     if (rooms) params.set('rooms', rooms);
     if (maxPrice) params.set('maxPrice', maxPrice);
     const query = params.toString();
@@ -34,10 +34,10 @@ export function SearchBar() {
       className="surface flex flex-col gap-2 rounded-3xl p-2 shadow-soft sm:flex-row sm:items-center sm:rounded-full"
     >
       <input
-        value={location}
-        onChange={(event) => setLocation(event.target.value)}
-        placeholder={t('location')}
-        aria-label={t('location')}
+        value={district}
+        onChange={(event) => setDistrict(event.target.value)}
+        placeholder={t('district')}
+        aria-label={t('district')}
         className={`${fieldClass} flex-1 rounded-full`}
       />
       <div className="hidden h-6 w-px bg-border sm:block" />

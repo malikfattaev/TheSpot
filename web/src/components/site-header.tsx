@@ -11,7 +11,7 @@ export async function SiteHeader() {
   const user = await getCurrentUser();
 
   return (
-    <header className="w-full">
+    <header className="relative z-50 w-full">
       <div className="container flex h-20 items-center justify-between gap-6">
         <Link href="/" className="text-xl font-semibold tracking-tight">
           The Spot

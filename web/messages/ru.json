@@ -9,7 +9,7 @@
     "about": "О нас"
   },
   "Search": {
-    "location": "Город или район",
+    "district": "Район",
     "rooms": "Комнаты",
     "anyRooms": "Любые",
     "price": "Цена до",

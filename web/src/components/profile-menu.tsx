@@ -78,7 +78,7 @@ export function ProfileMenu({ user }: { user: SessionUser | null }) {
       {open && (
         <div
           role="menu"
-          className="surface animate-fade-in absolute right-0 mt-2 w-64 origin-top-right rounded-2xl p-2 shadow-soft"
+          className="animate-fade-in absolute right-0 z-50 mt-2 w-64 origin-top-right rounded-2xl border border-border bg-card p-2 shadow-xl"
         >
           <div className="px-3 py-2">
             <p className="font-semibold leading-tight">{user.fullName}</p>
