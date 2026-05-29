@@ -1,6 +1,6 @@
 {
   "Metadata": {
-    "title": "The Spot — O‘zbekistonda ko‘chmas mulk ijarasi",
+    "title": "The Spot - O‘zbekistonda ko‘chmas mulk ijarasi",
     "description": "O‘zbekiston bo‘ylab kvartira ijarasi e’lonlarini topish va joylash."
   },
   "Nav": {
@@ -34,7 +34,7 @@
   },
   "About": {
     "heroTitle": "O‘z joyingizni toping",
-    "heroSubtitle": "O‘zbekiston bo‘ylab kvartira ijarasi — tez, qulay va vositachilarsiz.",
+    "heroSubtitle": "O‘zbekiston bo‘ylab kvartira ijarasi - tez, qulay va vositachilarsiz.",
     "ctaBrowse": "E’lonlarni ko‘rish",
     "ctaPost": "Uy joylash",
     "features": {
@@ -71,7 +71,7 @@
   },
   "Contacts": {
     "title": "Aloqa",
-    "subtitle": "Biz bilan bog‘laning — ijara bo‘yicha yordam beramiz.",
+    "subtitle": "Biz bilan bog‘laning - ijara bo‘yicha yordam beramiz.",
     "email": "hello@thespot.uz",
     "phone": "+998 90 000 00 00",
     "telegram": "@thespot"
