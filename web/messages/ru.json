@@ -6,7 +6,8 @@
   "Nav": {
     "home": "Главная",
     "listings": "Объявления",
-    "about": "О нас"
+    "about": "О нас",
+    "contacts": "Контакты"
   },
   "Search": {
     "district": "Район",
@@ -67,5 +68,17 @@
     "label": "Язык",
     "ru": "Русский",
     "uz": "O‘zbek"
+  },
+  "Contacts": {
+    "title": "Контакты",
+    "subtitle": "Свяжитесь с нами — мы на связи и поможем с арендой.",
+    "email": "hello@thespot.uz",
+    "phone": "+998 90 000 00 00",
+    "telegram": "@thespot"
+  },
+  "Filter": {
+    "title": "Фильтр",
+    "apply": "Применить",
+    "reset": "Сбросить"
   }
 }

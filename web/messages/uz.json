@@ -6,7 +6,8 @@
   "Nav": {
     "home": "Bosh sahifa",
     "listings": "E’lonlar",
-    "about": "Biz haqimizda"
+    "about": "Biz haqimizda",
+    "contacts": "Aloqa"
   },
   "Search": {
     "district": "Tuman",
@@ -67,5 +68,17 @@
     "label": "Til",
     "ru": "Русский",
     "uz": "O‘zbek"
+  },
+  "Contacts": {
+    "title": "Aloqa",
+    "subtitle": "Biz bilan bog‘laning — ijara bo‘yicha yordam beramiz.",
+    "email": "hello@thespot.uz",
+    "phone": "+998 90 000 00 00",
+    "telegram": "@thespot"
+  },
+  "Filter": {
+    "title": "Filtr",
+    "apply": "Qo‘llash",
+    "reset": "Tozalash"
   }
 }

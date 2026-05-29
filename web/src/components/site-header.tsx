@@ -19,14 +19,11 @@ export async function SiteHeader() {
 
         <div className="flex items-center gap-5 sm:gap-6">
           <nav className="hidden items-center gap-7 text-sm text-muted-foreground md:flex">
-            <Link href="/" className={navLinkClass}>
-              {t('home')}
-            </Link>
-            <Link href="/listings" className={navLinkClass}>
-              {t('listings')}
-            </Link>
             <Link href="/about" className={navLinkClass}>
               {t('about')}
+            </Link>
+            <Link href="/contacts" className={navLinkClass}>
+              {t('contacts')}
             </Link>
           </nav>
 
