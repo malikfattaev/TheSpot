@@ -6,10 +6,32 @@
   "Nav": {
     "home": "Bosh sahifa",
     "listings": "E’lonlar",
-    "postListing": "E’lon joylash",
-    "login": "Kirish"
+    "about": "Biz haqimizda"
+  },
+  "Search": {
+    "location": "Shahar yoki tuman",
+    "rooms": "Xonalar",
+    "anyRooms": "Har qanday",
+    "price": "Narx (gacha)",
+    "submit": "Qidirish"
   },
   "Home": {
+    "title": "So‘nggi e’lonlar",
+    "empty": "Hozircha e’lonlar yo‘q. Keyinroq qarang."
+  },
+  "Listings": {
+    "title": "E’lonlar",
+    "empty": "Hozircha e’lonlar yo‘q. Keyinroq qarang."
+  },
+  "PostListing": {
+    "title": "E’lon joylash",
+    "subtitle": "Uy joylash formasi shu yerda paydo bo‘ladi. Uy egalari va rieltorlar uchun."
+  },
+  "ListingCard": {
+    "rooms": "{count} xona",
+    "perMonth": "/oy"
+  },
+  "About": {
     "heroTitle": "O‘z joyingizni toping",
     "heroSubtitle": "O‘zbekiston bo‘ylab kvartira ijarasi — tez, qulay va vositachilarsiz.",
     "ctaBrowse": "E’lonlarni ko‘rish",
@@ -29,13 +51,17 @@
       }
     }
   },
-  "Listings": {
-    "title": "E’lonlar",
-    "empty": "Hozircha e’lonlar yo‘q. Keyinroq qarang."
+  "Roles": {
+    "SEEKER": "Qidiruvchi",
+    "OWNER": "Uy egasi",
+    "REALTOR": "Rieltor",
+    "ADMIN": "Administrator"
   },
-  "PostListing": {
-    "title": "E’lon joylash",
-    "subtitle": "Uy joylash formasi shu yerda paydo bo‘ladi. Uy egalari uchun mavjud."
+  "Profile": {
+    "menu": "Profil",
+    "myListings": "Mening e’lonlarim",
+    "logout": "Chiqish",
+    "login": "Kirish"
   },
   "LocaleSwitcher": {
     "label": "Til",

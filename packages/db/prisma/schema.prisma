@@ -11,9 +11,11 @@ datasource db {
 }
 
 /// Role is chosen by the user at registration and gates what they can do.
+/// Owners and realtors may publish listings; see `canPublishListings`.
 enum UserRole {
   SEEKER // looking for a place to rent
-  LANDLORD // publishes listings
+  OWNER // property owner, publishes listings
+  REALTOR // estate agent, publishes listings
   ADMIN // platform staff
 }
 

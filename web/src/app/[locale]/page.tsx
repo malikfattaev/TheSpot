@@ -1,70 +1,51 @@
-import { BadgeCheck, HandCoins, Search } from 'lucide-react';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
-import { buttonVariants } from '@/components/ui/button';
-import { Link } from '@/i18n/navigation';
+import { ListingCard } from '@/components/listing-card';
+import { SearchBar } from '@/components/search-bar';
+import { getPublishedListings } from '@/lib/data/listings';
 
 type HomePageProps = {
   params: Promise<{ locale: string }>;
 };
 
-const features = [
-  { key: 'search', icon: Search },
-  { key: 'verified', icon: BadgeCheck },
-  { key: 'noFee', icon: HandCoins },
-] as const;
-
 export default async function HomePage({ params }: HomePageProps) {
   const { locale } = await params;
   setRequestLocale(locale);
   const t = await getTranslations('Home');
+  const listings = await getPublishedListings();
 
   return (
-    <section className="container">
-      <div className="flex flex-col items-center gap-7 py-24 text-center sm:py-32">
-        <h1
-          className="animate-fade-up max-w-3xl text-5xl font-semibold tracking-tight sm:text-6xl"
-          style={{ animationDelay: '40ms' }}
-        >
-          {t('heroTitle')}
-        </h1>
+    <section className="container py-10 sm:py-14">
+      <div className="animate-fade-up">
+        <SearchBar />
+      </div>
 
-        <p
-          className="animate-fade-up max-w-xl text-lg text-muted-foreground"
+      <h2
+        className="animate-fade-up mt-12 text-xl font-semibold tracking-tight"
+        style={{ animationDelay: '80ms' }}
+      >
+        {t('title')}
+      </h2>
+
+      {listings.length === 0 ? (
+        <div
+          className="surface animate-fade-up mt-6 rounded-3xl p-12 text-center text-muted-foreground"
           style={{ animationDelay: '120ms' }}
         >
-          {t('heroSubtitle')}
-        </p>
-
-        <div
-          className="animate-fade-up flex flex-wrap items-center justify-center gap-3"
-          style={{ animationDelay: '200ms' }}
-        >
-          <Link href="/listings" className={buttonVariants({ size: 'lg' })}>
-            {t('ctaBrowse')}
-          </Link>
-          <Link href="/listings/new" className={buttonVariants({ variant: 'outline', size: 'lg' })}>
-            {t('ctaPost')}
-          </Link>
+          {t('empty')}
         </div>
-
-        <div className="mt-14 grid w-full max-w-4xl gap-4 sm:grid-cols-3">
-          {features.map(({ key, icon: Icon }, index) => (
-            <article
-              key={key}
-              className="surface animate-fade-up rounded-3xl p-6 text-left transition-shadow duration-300 ease-smooth hover:shadow-soft"
-              style={{ animationDelay: `${280 + index * 80}ms` }}
+      ) : (
+        <div className="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+          {listings.map((listing, index) => (
+            <div
+              key={listing.id}
+              className="animate-fade-up"
+              style={{ animationDelay: `${index * 60}ms` }}
             >
-              <span className="flex h-11 w-11 items-center justify-center rounded-2xl bg-primary text-primary-foreground">
-                <Icon className="h-5 w-5" aria-hidden />
-              </span>
-              <h3 className="mt-4 font-semibold">{t(`features.${key}.title`)}</h3>
-              <p className="mt-1 text-sm text-muted-foreground">
-                {t(`features.${key}.description`)}
-              </p>
-            </article>
+              <ListingCard listing={listing} />
+            </div>
           ))}
         </div>
-      </div>
+      )}
     </section>
   );
 }
