@@ -15,30 +15,27 @@ export function LocaleSwitcher() {
   const locale = useLocale() as Locale;
   const router = useRouter();
   const pathname = usePathname();
-  const activeIndex = routing.locales.indexOf(locale);
 
   return (
-    <div className="glass relative flex rounded-full p-1 shadow-glass" role="group" aria-label={t('label')}>
-      {/* Sliding pill that glides under the active locale. */}
-      <span
-        aria-hidden
-        className="bg-brand absolute inset-y-1 left-1 w-9 rounded-full shadow-glow transition-transform duration-300 ease-smooth"
-        style={{ transform: `translateX(${activeIndex * 100}%)` }}
-      />
-      {routing.locales.map((value) => (
-        <button
-          key={value}
-          type="button"
-          aria-label={t(value)}
-          aria-pressed={value === locale}
-          onClick={() => router.replace(pathname, { locale: value })}
-          className={cn(
-            'relative z-10 h-8 w-9 rounded-full text-xs font-bold transition-colors duration-300 ease-smooth',
-            value === locale ? 'text-primary-foreground' : 'text-muted-foreground hover:text-foreground',
-          )}
-        >
-          {shortLabels[value]}
-        </button>
+    <div className="flex items-center gap-1 text-sm" role="group" aria-label={t('label')}>
+      {routing.locales.map((value, index) => (
+        <div key={value} className="flex items-center">
+          {index > 0 && <span className="px-1 text-foreground/25">/</span>}
+          <button
+            type="button"
+            aria-label={t(value)}
+            aria-pressed={value === locale}
+            onClick={() => router.replace(pathname, { locale: value })}
+            className={cn(
+              'transition-colors duration-300 ease-smooth',
+              value === locale
+                ? 'font-semibold text-foreground'
+                : 'text-muted-foreground hover:text-foreground',
+            )}
+          >
+            {shortLabels[value]}
+          </button>
+        </div>
       ))}
     </div>
   );

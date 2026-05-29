@@ -26,7 +26,8 @@
       "Bash(curl -s -o /dev/null -w \"web /uz: %{http_code}\\\\n\" http://localhost:3000/uz)",
       "Bash(pkill -f \"next dev\")",
       "Bash(pkill -f \"turbo run dev\")",
-      "Bash(curl -s -o /dev/null -w \"erp /: %{http_code}\\\\n\" http://localhost:3001/)"
+      "Bash(curl -s -o /dev/null -w \"erp /: %{http_code}\\\\n\" http://localhost:3001/)",
+      "Bash(curl -s http://localhost:3000/ru)"
     ]
   }
 }

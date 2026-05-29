@@ -14,7 +14,7 @@ export default async function ListingsPage({ params }: ListingsPageProps) {
       <h1 className="animate-fade-up text-3xl font-extrabold tracking-tight sm:text-4xl">
         {t('title')}
       </h1>
-      <div className="glass animate-fade-up mt-8 rounded-3xl p-12 text-center text-muted-foreground shadow-glass">
+      <div className="surface animate-fade-up mt-8 rounded-3xl p-12 text-center text-muted-foreground">
         {t('empty')}
       </div>
     </section>

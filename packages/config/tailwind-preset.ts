@@ -63,22 +63,9 @@ const preset: Omit<Config, 'content'> = {
         sans: ['var(--font-sans)', 'system-ui', 'sans-serif'],
       },
       boxShadow: {
-        soft: '0 8px 30px -12px hsl(var(--shadow-color) / 0.25)',
-        glow: '0 10px 40px -10px hsl(var(--primary) / 0.55)',
-        glass: '0 8px 32px -8px hsl(var(--shadow-color) / 0.18)',
-      },
-      backgroundSize: {
-        '200': '200% 200%',
+        soft: '0 12px 40px -18px hsl(240 30% 25% / 0.25)',
       },
       keyframes: {
-        float: {
-          '0%, 100%': { transform: 'translateY(0) translateX(0)' },
-          '50%': { transform: 'translateY(-24px) translateX(12px)' },
-        },
-        'gradient-pan': {
-          '0%, 100%': { backgroundPosition: '0% 50%' },
-          '50%': { backgroundPosition: '100% 50%' },
-        },
         'fade-up': {
           '0%': { opacity: '0', transform: 'translateY(16px)' },
           '100%': { opacity: '1', transform: 'translateY(0)' },
@@ -89,9 +76,6 @@ const preset: Omit<Config, 'content'> = {
         },
       },
       animation: {
-        float: 'float 9s ease-in-out infinite',
-        'float-slow': 'float 14s ease-in-out infinite',
-        'gradient-pan': 'gradient-pan 8s ease infinite',
         'fade-up': 'fade-up 0.7s cubic-bezier(0.22, 1, 0.36, 1) both',
         'fade-in': 'fade-in 0.6s ease both',
       },
