@@ -49,7 +49,7 @@ export default async function HomePage({ params, searchParams }: HomePageProps) 
       </div>
 
       <div
-        className="animate-fade-up mt-12 flex flex-wrap items-center justify-between gap-3"
+        className="animate-fade-up relative z-20 mt-12 flex flex-wrap items-center justify-between gap-3"
         style={{ animationDelay: '80ms' }}
       >
         <h2 className="text-xl font-semibold tracking-tight">{t('title')}</h2>
