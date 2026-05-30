@@ -53,9 +53,9 @@
     }
   },
   "Roles": {
-    "SEEKER": "Qidiruvchi",
+    "SEEKER": "Ijarachi",
     "OWNER": "Uy egasi",
-    "REALTOR": "Rieltor",
+    "REALTOR": "Ijaraga beruvchi",
     "ADMIN": "Administrator"
   },
   "Profile": {
@@ -63,6 +63,38 @@
     "myListings": "Mening e’lonlarim",
     "logout": "Chiqish",
     "login": "Kirish"
+  },
+  "Login": {
+    "eyebrow": "The Spotga kirish",
+    "title": "Bir daqiqada akkaunt yarating",
+    "subtitle": "Telefon raqamingiz, ism-familiyangiz va rolingizni kiriting. Raqam bazada bo‘lsa, mavjud profilga kirasiz.",
+    "firstName": "Ism",
+    "lastName": "Familiya",
+    "phone": "Telefon raqami",
+    "role": "Rolni tanlang",
+    "submit": "Kirish",
+    "submitting": "Kirilmoqda...",
+    "consent": "Davom etish orqali raqam sizga tegishli ekanini tasdiqlaysiz. SMS tasdiqlash keyinroq ulanadi.",
+    "roles": {
+      "tenant": {
+        "title": "Ijarachi",
+        "description": "Ijara uchun uy qidiryapman."
+      },
+      "landlord": {
+        "title": "Ijaraga beruvchi",
+        "description": "Uy beraman yoki obyektlarni boshqaraman."
+      },
+      "owner": {
+        "title": "Uy egasi",
+        "description": "O‘z ko‘chmas mulkimni joylayman."
+      }
+    },
+    "errors": {
+      "invalidFields": "Ism, familiya, telefon va rolni tekshiring.",
+      "invalidPhone": "To‘g‘ri telefon raqamini kiriting.",
+      "databaseUnavailable": "Ma’lumotlar bazasi vaqtincha mavjud emas. Keyinroq urinib ko‘ring.",
+      "unknown": "Kirish amalga oshmadi. Yana urinib ko‘ring."
+    }
   },
   "LocaleSwitcher": {
     "label": "Til",

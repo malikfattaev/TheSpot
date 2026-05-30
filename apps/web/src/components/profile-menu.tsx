@@ -2,8 +2,9 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { ChevronDown, LayoutList, LogOut } from 'lucide-react';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import { canPublishListings } from '@thespot/db/roles';
+import { signOut } from '@/app/[locale]/login/actions';
 import { Link } from '@/i18n/navigation';
 import type { SessionUser } from '@/lib/session';
 import { buttonVariants } from './ui/button';
@@ -22,6 +23,7 @@ function getInitials(name: string): string {
 export function ProfileMenu({ user }: { user: SessionUser | null }) {
   const t = useTranslations('Profile');
   const tRoles = useTranslations('Roles');
+  const locale = useLocale();
   const [open, setOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -100,14 +102,17 @@ export function ProfileMenu({ user }: { user: SessionUser | null }) {
             </Link>
           )}
 
-          <button
-            type="button"
-            role="menuitem"
-            className="text-muted-foreground hover:bg-foreground/5 hover:text-foreground flex w-full items-center gap-2.5 rounded-xl px-3 py-2 text-sm transition-colors duration-200"
-          >
-            <LogOut className="h-4 w-4" aria-hidden />
-            {t('logout')}
-          </button>
+          <form action={signOut}>
+            <input type="hidden" name="locale" value={locale} />
+            <button
+              type="submit"
+              role="menuitem"
+              className="text-muted-foreground hover:bg-foreground/5 hover:text-foreground flex w-full items-center gap-2.5 rounded-xl px-3 py-2 text-sm transition-colors duration-200"
+            >
+              <LogOut className="h-4 w-4" aria-hidden />
+              {t('logout')}
+            </button>
+          </form>
         </div>
       )}
     </div>

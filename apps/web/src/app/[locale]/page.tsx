@@ -1,9 +1,11 @@
 import type { Metadata } from 'next';
-import { getTranslations, setRequestLocale } from 'next-intl/server';
+import { getTranslations } from 'next-intl/server';
 import { ListingCard } from '@/components/listing-card';
 import { ListingsFilter } from '@/components/listings-filter';
 import { SearchBar } from '@/components/search-bar';
 import { getPublishedListings } from '@/lib/data/listings';
+
+export const dynamic = 'force-dynamic';
 
 type SearchParams = Record<string, string | string[] | undefined>;
 
@@ -29,9 +31,7 @@ export async function generateMetadata({ params }: HomePageProps): Promise<Metad
   return { title: { absolute: `The Spot | ${t('home')}` } };
 }
 
-export default async function HomePage({ params, searchParams }: HomePageProps) {
-  const { locale } = await params;
-  setRequestLocale(locale);
+export default async function HomePage({ searchParams }: HomePageProps) {
   const t = await getTranslations('Home');
 
   const sp = await searchParams;

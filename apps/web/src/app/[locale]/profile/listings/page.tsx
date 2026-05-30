@@ -1,5 +1,7 @@
 import type { Metadata } from 'next';
-import { getTranslations, setRequestLocale } from 'next-intl/server';
+import { getTranslations } from 'next-intl/server';
+
+export const dynamic = 'force-dynamic';
 
 type ProfileListingsPageProps = {
   params: Promise<{ locale: string }>;
@@ -11,9 +13,7 @@ export async function generateMetadata({ params }: ProfileListingsPageProps): Pr
   return { title: t('myListings') };
 }
 
-export default async function ProfileListingsPage({ params }: ProfileListingsPageProps) {
-  const { locale } = await params;
-  setRequestLocale(locale);
+export default async function ProfileListingsPage() {
   const t = await getTranslations();
 
   return (

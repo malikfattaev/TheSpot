@@ -2,11 +2,13 @@ import type { Metadata } from 'next';
 import { Manrope } from 'next/font/google';
 import { notFound } from 'next/navigation';
 import { NextIntlClientProvider } from 'next-intl';
-import { getMessages, getTranslations, setRequestLocale } from 'next-intl/server';
+import { getMessages, getTranslations } from 'next-intl/server';
 import { SiteHeader } from '@/components/site-header';
 import { routing, type Locale } from '@/i18n/routing';
 import { env } from '@/lib/env';
 import '../globals.css';
+
+export const dynamic = 'force-dynamic';
 
 const fontSans = Manrope({
   subsets: ['latin', 'cyrillic'],
@@ -18,10 +20,6 @@ type LocaleLayoutProps = {
   children: React.ReactNode;
   params: Promise<{ locale: string }>;
 };
-
-export function generateStaticParams() {
-  return routing.locales.map((locale) => ({ locale }));
-}
 
 export async function generateMetadata({
   params,
@@ -49,7 +47,6 @@ export default async function LocaleLayout({ children, params }: LocaleLayoutPro
     notFound();
   }
 
-  setRequestLocale(locale);
   const messages = await getMessages();
 
   return (

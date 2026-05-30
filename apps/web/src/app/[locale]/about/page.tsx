@@ -1,8 +1,10 @@
 import type { Metadata } from 'next';
 import { BadgeCheck, HandCoins, Search } from 'lucide-react';
-import { getTranslations, setRequestLocale } from 'next-intl/server';
+import { getTranslations } from 'next-intl/server';
 import { buttonVariants } from '@/components/ui/button';
 import { Link } from '@/i18n/navigation';
+
+export const dynamic = 'force-dynamic';
 
 type AboutPageProps = {
   params: Promise<{ locale: string }>;
@@ -20,9 +22,7 @@ const features = [
   { key: 'noFee', icon: HandCoins },
 ] as const;
 
-export default async function AboutPage({ params }: AboutPageProps) {
-  const { locale } = await params;
-  setRequestLocale(locale);
+export default async function AboutPage() {
   const t = await getTranslations('About');
 
   return (

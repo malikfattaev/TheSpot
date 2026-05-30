@@ -1,6 +1,8 @@
 import type { Metadata } from 'next';
 import { Mail, Phone, Send } from 'lucide-react';
-import { getTranslations, setRequestLocale } from 'next-intl/server';
+import { getTranslations } from 'next-intl/server';
+
+export const dynamic = 'force-dynamic';
 
 type ContactsPageProps = {
   params: Promise<{ locale: string }>;
@@ -12,9 +14,7 @@ export async function generateMetadata({ params }: ContactsPageProps): Promise<M
   return { title: t('title') };
 }
 
-export default async function ContactsPage({ params }: ContactsPageProps) {
-  const { locale } = await params;
-  setRequestLocale(locale);
+export default async function ContactsPage() {
   const t = await getTranslations('Contacts');
 
   const channels = [
