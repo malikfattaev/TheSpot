@@ -65,7 +65,6 @@
     "login": "Kirish"
   },
   "Login": {
-    "eyebrow": "The Spotga kirish",
     "title": "Bir daqiqada akkaunt yarating",
     "subtitle": "Telefon raqamingiz, ism-familiyangiz va rolingizni kiriting. Raqam bazada bo‘lsa, mavjud profilga kirasiz.",
     "firstName": "Ism",

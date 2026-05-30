@@ -27,11 +27,10 @@ export default async function LoginPage({ params }: LoginPageProps) {
   const t = await getTranslations('Login');
 
   return (
-    <section className="container grid min-h-[calc(100vh-5rem)] place-items-center py-12">
-      <div className="grid w-full max-w-2xl gap-7">
+    <section className="container flex min-h-[calc(100vh-5rem)] items-center justify-center py-12">
+      <div className="mx-auto grid w-full max-w-2xl gap-7">
         <div className="animate-fade-up text-center">
-          <p className="text-muted-foreground text-sm font-medium">{t('eyebrow')}</p>
-          <h1 className="mt-3 text-3xl font-semibold tracking-tight sm:text-5xl">{t('title')}</h1>
+          <h1 className="text-3xl font-semibold tracking-tight sm:text-5xl">{t('title')}</h1>
           <p className="text-muted-foreground mx-auto mt-4 max-w-lg text-base leading-7">
             {t('subtitle')}
           </p>

@@ -35,7 +35,7 @@ export function LoginForm({ locale }: { locale: string }) {
   return (
     <form
       action={formAction}
-      className="surface animate-fade-up shadow-soft grid gap-5 rounded-3xl p-6"
+      className="surface animate-fade-up shadow-soft mx-auto grid w-full gap-5 rounded-3xl p-6"
     >
       <input type="hidden" name="locale" value={locale} />
 
@@ -86,9 +86,9 @@ export function LoginForm({ locale }: { locale: string }) {
 
       <fieldset className="grid gap-3">
         <legend className="text-muted-foreground text-sm font-medium">{t('role')}</legend>
-        <div className="grid gap-3 sm:grid-cols-3">
+        <div className="grid auto-rows-fr gap-3 sm:grid-cols-3">
           {roleOptions.map(({ value, key, icon: Icon }) => (
-            <label key={value} className="group relative cursor-pointer">
+            <label key={value} className="group relative h-full cursor-pointer">
               <input
                 type="radio"
                 name="role"
@@ -97,12 +97,9 @@ export function LoginForm({ locale }: { locale: string }) {
                 defaultChecked={value === 'SEEKER'}
                 className="peer sr-only"
               />
-              <span className="border-border bg-background/70 ease-smooth peer-checked:border-foreground/50 peer-checked:bg-card peer-checked:shadow-soft group-hover:border-foreground/30 flex min-h-28 flex-col justify-between rounded-2xl border p-4 transition-all duration-300">
-                <Icon
-                  className="text-muted-foreground peer-checked:text-foreground h-5 w-5"
-                  aria-hidden
-                />
-                <span className="mt-4 text-sm font-semibold">{t(`roles.${key}.title`)}</span>
+              <span className="border-border bg-background/70 ease-smooth peer-checked:border-foreground/50 peer-checked:bg-card peer-checked:shadow-soft group-hover:border-foreground/30 flex h-full min-h-36 flex-col rounded-2xl border p-4 transition-all duration-300">
+                <Icon className="text-muted-foreground h-5 w-5" aria-hidden />
+                <span className="mt-5 text-sm font-semibold">{t(`roles.${key}.title`)}</span>
                 <span className="text-muted-foreground mt-1 text-xs leading-5">
                   {t(`roles.${key}.description`)}
                 </span>
