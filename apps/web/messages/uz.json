@@ -65,15 +65,45 @@
     "login": "Kirish"
   },
   "Login": {
-    "title": "Bir daqiqada akkaunt yarating",
-    "subtitle": "Telefon raqamingiz, ism-familiyangiz va rolingizni kiriting. Raqam bazada bo‘lsa, mavjud profilga kirasiz.",
+    "title": "Kirish",
+    "subtitle": "Telefon raqamingizni kiriting — tasdiqlash kodini yuboramiz.",
+    "phone": "Telefon raqami",
+    "sendCode": "Kod olish",
+    "sending": "Yuborilmoqda...",
+    "code": "Tasdiqlash kodi",
+    "codeSentTo": "Kodni {phone} raqamiga yubordik.",
+    "verify": "Kirish",
+    "verifying": "Kirilmoqda...",
+    "changePhone": "Raqamni o‘zgartirish",
+    "devHint": "Sinov tasdiqlash kodi: 0000",
+    "noAccountPrompt": "Akkauntingiz yo‘qmi?",
+    "registerLink": "Ro‘yxatdan o‘tish",
+    "errors": {
+      "invalidPhone": "To‘g‘ri telefon raqamini kiriting.",
+      "invalidCode": "Kod noto‘g‘ri. Yana urinib ko‘ring.",
+      "noAccount": "Bu raqam bilan akkaunt topilmadi. Ro‘yxatdan o‘ting.",
+      "databaseUnavailable": "Ma’lumotlar bazasi vaqtincha mavjud emas. Keyinroq urinib ko‘ring.",
+      "unknown": "Nimadir xato ketdi. Yana urinib ko‘ring."
+    }
+  },
+  "Register": {
+    "title": "Ro‘yxatdan o‘tish",
+    "subtitle": "Ism, telefon va rolingizni kiriting — tasdiqlash kodini yuboramiz.",
     "firstName": "Ism",
     "lastName": "Familiya",
     "phone": "Telefon raqami",
     "role": "Rolni tanlang",
-    "submit": "Kirish",
-    "submitting": "Kirilmoqda...",
+    "sendCode": "Kod olish",
+    "sending": "Yuborilmoqda...",
+    "code": "Tasdiqlash kodi",
+    "codeSentTo": "Kodni {phone} raqamiga yubordik.",
+    "verify": "Akkaunt yaratish",
+    "verifying": "Yaratilmoqda...",
+    "changePhone": "Ma’lumotlarni o‘zgartirish",
+    "devHint": "Sinov tasdiqlash kodi: 0000",
     "consent": "Davom etish orqali raqam sizga tegishli ekanini tasdiqlaysiz. SMS tasdiqlash keyinroq ulanadi.",
+    "haveAccountPrompt": "Akkauntingiz bormi?",
+    "loginLink": "Kirish",
     "roles": {
       "tenant": {
         "title": "Ijarachi",
@@ -91,8 +121,10 @@
     "errors": {
       "invalidFields": "Ism, familiya, telefon va rolni tekshiring.",
       "invalidPhone": "To‘g‘ri telefon raqamini kiriting.",
+      "invalidCode": "Kod noto‘g‘ri. Yana urinib ko‘ring.",
+      "phoneTaken": "Bu raqam allaqachon ro‘yxatdan o‘tgan. Akkauntga kiring.",
       "databaseUnavailable": "Ma’lumotlar bazasi vaqtincha mavjud emas. Keyinroq urinib ko‘ring.",
-      "unknown": "Kirish amalga oshmadi. Yana urinib ko‘ring."
+      "unknown": "Nimadir xato ketdi. Yana urinib ko‘ring."
     }
   },
   "LocaleSwitcher": {

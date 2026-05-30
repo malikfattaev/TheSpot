@@ -53,7 +53,16 @@ COPY --from=builder --chown=nextjs:nodejs /app/apps/${APP}/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/apps/${APP}/.next/static ./apps/${APP}/.next/static
 COPY --from=builder --chown=nextjs:nodejs /app/apps/${APP}/public ./apps/${APP}/public
 
+# Prisma CLI + schema/migrations so the container applies pending migrations
+# on boot. The standalone trace omits the CLI (it's never imported at runtime),
+# so we copy it and the engines explicitly.
+COPY --from=builder /app/node_modules/prisma ./node_modules/prisma
+COPY --from=builder /app/node_modules/@prisma ./node_modules/@prisma
+COPY --from=builder /app/packages/db/prisma ./packages/db/prisma
+
 USER nextjs
 EXPOSE 3000
 # Railway injects PORT; the standalone server reads it from the environment.
-CMD ["sh", "-c", "node apps/${APP}/server.js"]
+# Apply any pending migrations, then start the server. A failed migration
+# aborts the boot so we never serve against an out-of-date schema.
+CMD ["sh", "-c", "node node_modules/prisma/build/index.js migrate deploy --schema=packages/db/prisma/schema.prisma && node apps/${APP}/server.js"]
