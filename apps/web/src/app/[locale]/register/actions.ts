@@ -105,6 +105,6 @@ export async function verifyRegister(
     return { error: 'unknown' };
   }
 
-  revalidatePath(`/${locale}`);
+  revalidatePath('/', 'layout');
   redirect(`/${locale}`);
 }

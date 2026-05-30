@@ -82,7 +82,7 @@ export async function verifyLogin(
     return { error: 'unknown' };
   }
 
-  revalidatePath(`/${localeParsed.data}`);
+  revalidatePath('/', 'layout');
   redirect(`/${localeParsed.data}`);
 }
 
@@ -93,6 +93,8 @@ export async function signOut(formData: FormData) {
     : routing.defaultLocale;
 
   await clearUserSession();
-  revalidatePath(`/${locale}`);
+  // Revalidate the whole layout (not just the page) so the header — which
+  // reads the session — re-renders even when we redirect to the same URL.
+  revalidatePath('/', 'layout');
   redirect(`/${locale}`);
 }
