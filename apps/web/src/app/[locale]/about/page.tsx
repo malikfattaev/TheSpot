@@ -1,8 +1,10 @@
 import type { Metadata } from 'next';
 import { BadgeCheck, HandCoins, Search } from 'lucide-react';
 import { getTranslations } from 'next-intl/server';
+import { canPublishListings } from '@thespot/db/roles';
 import { buttonVariants } from '@/components/ui/button';
 import { Link } from '@/i18n/navigation';
+import { getCurrentUser } from '@/lib/session';
 
 export const dynamic = 'force-dynamic';
 
@@ -24,6 +26,9 @@ const features = [
 
 export default async function AboutPage() {
   const t = await getTranslations('About');
+  const user = await getCurrentUser();
+  // Seekers don't publish listings, so don't invite them to post one.
+  const canPost = !user || canPublishListings(user.role);
 
   return (
     <section className="container">
@@ -49,9 +54,11 @@ export default async function AboutPage() {
           <Link href="/listings" className={buttonVariants({ size: 'lg' })}>
             {t('ctaBrowse')}
           </Link>
-          <Link href="/listings/new" className={buttonVariants({ variant: 'outline', size: 'lg' })}>
-            {t('ctaPost')}
-          </Link>
+          {canPost ? (
+            <Link href="/listings/new" className={buttonVariants({ variant: 'outline', size: 'lg' })}>
+              {t('ctaPost')}
+            </Link>
+          ) : null}
         </div>
 
         <div className="mt-14 grid w-full max-w-4xl gap-4 sm:grid-cols-3">

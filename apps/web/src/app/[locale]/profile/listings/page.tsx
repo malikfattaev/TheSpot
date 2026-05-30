@@ -1,5 +1,8 @@
 import type { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
+import { redirect } from 'next/navigation';
+import { canPublishListings } from '@thespot/db/roles';
+import { getCurrentUser } from '@/lib/session';
 
 export const dynamic = 'force-dynamic';
 
@@ -13,7 +16,17 @@ export async function generateMetadata({ params }: ProfileListingsPageProps): Pr
   return { title: t('myListings') };
 }
 
-export default async function ProfileListingsPage() {
+export default async function ProfileListingsPage({ params }: ProfileListingsPageProps) {
+  const { locale } = await params;
+
+  const user = await getCurrentUser();
+  if (!user) {
+    redirect(`/${locale}/login`);
+  }
+  if (!canPublishListings(user.role)) {
+    redirect(`/${locale}`);
+  }
+
   const t = await getTranslations();
 
   return (
