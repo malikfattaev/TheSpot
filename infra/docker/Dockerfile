@@ -53,16 +53,16 @@ COPY --from=builder --chown=nextjs:nodejs /app/apps/${APP}/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/apps/${APP}/.next/static ./apps/${APP}/.next/static
 COPY --from=builder --chown=nextjs:nodejs /app/apps/${APP}/public ./apps/${APP}/public
 
-# Prisma CLI + schema/migrations so the container applies pending migrations
-# on boot. The standalone trace omits the CLI (it's never imported at runtime),
-# so we copy it and the engines explicitly.
-COPY --from=builder /app/node_modules/prisma ./node_modules/prisma
-COPY --from=builder /app/node_modules/@prisma ./node_modules/@prisma
-COPY --from=builder /app/packages/db/prisma ./packages/db/prisma
+# Prisma migrator: kept separate from the slim standalone runtime so the CLI
+# has its *complete* dependency closure (it pulls in @prisma/config -> effect
+# and friends that the standalone trace omits). Copying the full node_modules
+# here, rather than cherry-picking, is what makes `migrate deploy` resolve.
+COPY --from=builder /app/node_modules ./migrator/node_modules
+COPY --from=builder /app/packages/db/prisma ./migrator/prisma
 
 USER nextjs
 EXPOSE 3000
 # Railway injects PORT; the standalone server reads it from the environment.
 # Apply any pending migrations, then start the server. A failed migration
 # aborts the boot so we never serve against an out-of-date schema.
-CMD ["sh", "-c", "node node_modules/prisma/build/index.js migrate deploy --schema=packages/db/prisma/schema.prisma && node apps/${APP}/server.js"]
+CMD ["sh", "-c", "node migrator/node_modules/prisma/build/index.js migrate deploy --schema=migrator/prisma/schema.prisma && node apps/${APP}/server.js"]
