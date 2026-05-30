@@ -8,13 +8,16 @@
   },
   "packageManager": "npm@11.12.1",
   "workspaces": [
-    "web",
-    "erp",
+    "apps/*",
     "packages/*"
   ],
   "scripts": {
     "dev": "turbo run dev",
+    "dev:web": "npm run dev --workspace @thespot/web",
+    "dev:erp": "npm run dev --workspace @thespot/erp",
     "build": "turbo run build",
+    "build:web": "npm run build --workspace @thespot/web",
+    "build:erp": "npm run build --workspace @thespot/erp",
     "lint": "turbo run lint",
     "typecheck": "turbo run typecheck",
     "format": "prettier --write \"**/*.{ts,tsx,js,mjs,json,md}\"",

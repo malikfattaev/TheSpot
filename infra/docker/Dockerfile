@@ -19,8 +19,8 @@ ENV NEXT_TELEMETRY_DISABLED=1
 # layer is cached until a package.json or the lockfile changes.
 FROM base AS deps
 COPY package.json package-lock.json ./
-COPY web/package.json ./web/package.json
-COPY erp/package.json ./erp/package.json
+COPY apps/web/package.json ./apps/web/package.json
+COPY apps/erp/package.json ./apps/erp/package.json
 COPY packages/db/package.json ./packages/db/package.json
 COPY packages/config/package.json ./packages/config/package.json
 # Schema is needed because @thespot/db runs `prisma generate` on install.
@@ -48,12 +48,12 @@ RUN addgroup --system --gid 1001 nodejs \
   && adduser --system --uid 1001 nextjs
 
 # `output: 'standalone'` traces the whole monorepo from the root, so the
-# server entrypoint lives at ./<app>/server.js alongside node_modules.
-COPY --from=builder --chown=nextjs:nodejs /app/${APP}/.next/standalone ./
-COPY --from=builder --chown=nextjs:nodejs /app/${APP}/.next/static ./${APP}/.next/static
-COPY --from=builder --chown=nextjs:nodejs /app/${APP}/public ./${APP}/public
+# server entrypoint keeps the apps/<app>/server.js workspace path.
+COPY --from=builder --chown=nextjs:nodejs /app/apps/${APP}/.next/standalone ./
+COPY --from=builder --chown=nextjs:nodejs /app/apps/${APP}/.next/static ./apps/${APP}/.next/static
+COPY --from=builder --chown=nextjs:nodejs /app/apps/${APP}/public ./apps/${APP}/public
 
 USER nextjs
 EXPOSE 3000
 # Railway injects PORT; the standalone server reads it from the environment.
-CMD ["sh", "-c", "node ${APP}/server.js"]
+CMD ["sh", "-c", "node apps/${APP}/server.js"]
