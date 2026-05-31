@@ -26,7 +26,10 @@ export async function GET(_request: Request, { params }: MediaRouteProps): Promi
     return new Response(null, { status: 404 });
   }
 
-  return new Response(object.body, {
+  // Copy into a fresh ArrayBuffer so the body is a plain BlobPart, sidestepping
+  // the SharedArrayBuffer-tinged Uint8Array type the SDK hands back.
+  const bytes = new Uint8Array(object.body);
+  return new Response(bytes.buffer.slice(0) as ArrayBuffer, {
     headers: {
       'Content-Type': object.contentType,
       'Cache-Control': 'public, max-age=31536000, immutable',
