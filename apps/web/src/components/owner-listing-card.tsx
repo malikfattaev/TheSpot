@@ -61,7 +61,7 @@ export function OwnerListingCard({ listing }: { listing: OwnerListingData }) {
           </span>
           {listing.district ? (
             <span className="text-muted-foreground truncate text-xs uppercase tracking-wide">
-              {listing.district}
+              {listing.district} {tCard('districtSuffix')}
             </span>
           ) : null}
         </div>

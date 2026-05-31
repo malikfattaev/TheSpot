@@ -37,6 +37,7 @@
     "rooms": "{count} xona",
     "areaUnit": "m²",
     "floor": "{floor}-qavat",
+    "districtSuffix": "tuman",
     "perMonth": "/oy"
   },
   "ListingStatus": {

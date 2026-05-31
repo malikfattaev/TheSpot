@@ -37,6 +37,7 @@
     "rooms": "{count} комн.",
     "areaUnit": "м²",
     "floor": "{floor} этаж",
+    "districtSuffix": "район",
     "perMonth": "/мес"
   },
   "ListingStatus": {

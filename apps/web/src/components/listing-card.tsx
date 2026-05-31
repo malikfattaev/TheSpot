@@ -33,7 +33,7 @@ export function ListingCard({ listing }: { listing: ListingCardData }) {
       <div className="flex flex-1 flex-col p-4">
         {listing.district ? (
           <p className="text-muted-foreground text-xs font-medium uppercase tracking-wide">
-            {listing.district}
+            {listing.district} {t('districtSuffix')}
           </p>
         ) : null}
         <h3 className="mt-1 line-clamp-1 font-medium">{listing.title}</h3>
