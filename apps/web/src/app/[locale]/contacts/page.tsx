@@ -29,12 +29,12 @@ export default async function ContactsPage() {
   ] as const;
 
   return (
-    <section className="container py-14 sm:py-20">
-      <h1 className="animate-fade-up text-3xl font-extrabold tracking-tight sm:text-4xl">
+    <section className="container py-12 sm:py-16">
+      <h1 className="animate-fade-up text-3xl font-semibold tracking-tight sm:text-4xl">
         {t('title')}
       </h1>
       <p
-        className="animate-fade-up text-muted-foreground mt-4 max-w-xl"
+        className="text-muted-foreground animate-fade-up mt-3 max-w-2xl leading-7"
         style={{ animationDelay: '60ms' }}
       >
         {t('subtitle')}
