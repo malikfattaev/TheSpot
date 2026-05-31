@@ -4,7 +4,8 @@ import { notFound } from 'next/navigation';
 import { ArrowLeft, MapPin, Phone } from 'lucide-react';
 import { Link } from '@/i18n/navigation';
 import { ListingGallery } from '@/components/listing-gallery';
-import { getListingById } from '@/lib/data/listings';
+import { FavoriteButton } from '@/components/favorite-button';
+import { getFavoriteListingIds, getListingById } from '@/lib/data/listings';
 import { getCurrentUser } from '@/lib/session';
 import { formatPrice } from '@/lib/format';
 
@@ -40,6 +41,11 @@ export default async function ListingPage({ params }: ListingPageProps) {
     notFound();
   }
 
+  // Owners don't favorite their own listing; everyone else (incl. signed-out)
+  // sees the heart — a signed-out tap is routed to login by the button.
+  const isOwner = !!user && listing.owner.id === user.id;
+  const favorited = !isOwner && user ? (await getFavoriteListingIds(user.id)).has(listing.id) : false;
+
   const t = await getTranslations('Listing');
   const tRoles = await getTranslations('Roles');
   const tDistricts = await getTranslations('Districts');
@@ -66,8 +72,15 @@ export default async function ListingPage({ params }: ListingPageProps) {
         {t('back')}
       </Link>
 
-      <div className="animate-fade-up">
+      <div className="animate-fade-up relative">
         <ListingGallery images={listing.images} title={listing.title} />
+        {!isOwner ? (
+          <FavoriteButton
+            listingId={listing.id}
+            initialFavorited={favorited}
+            className="absolute right-4 top-4 z-10 h-10 w-10"
+          />
+        ) : null}
       </div>
 
       <div className="mt-8 grid gap-8 lg:grid-cols-[1fr_320px] lg:items-stretch">

@@ -3,7 +3,8 @@ import { getTranslations } from 'next-intl/server';
 import { ListingCard } from '@/components/listing-card';
 import { ListingsFilter } from '@/components/listings-filter';
 import { SearchBar } from '@/components/search-bar';
-import { getPublishedListings } from '@/lib/data/listings';
+import { getFavoriteListingIds, getPublishedListings } from '@/lib/data/listings';
+import { getCurrentUser } from '@/lib/session';
 import { isCurrency, isDistrictKey, isRentPeriod } from '@/lib/listing-options';
 
 export const dynamic = 'force-dynamic';
@@ -39,13 +40,17 @@ export default async function HomePage({ searchParams }: HomePageProps) {
   const district = firstValue(sp.district);
   const currency = firstValue(sp.currency);
   const rentPeriod = firstValue(sp.rentPeriod);
-  const listings = await getPublishedListings({
-    rooms: toPositiveInt(sp.rooms),
-    district: isDistrictKey(district) ? district : undefined,
-    maxPrice: toPositiveInt(sp.maxPrice),
-    currency: isCurrency(currency) ? currency : undefined,
-    rentPeriod: isRentPeriod(rentPeriod) ? rentPeriod : undefined,
-  });
+  const user = await getCurrentUser();
+  const [listings, favoriteIds] = await Promise.all([
+    getPublishedListings({
+      rooms: toPositiveInt(sp.rooms),
+      district: isDistrictKey(district) ? district : undefined,
+      maxPrice: toPositiveInt(sp.maxPrice),
+      currency: isCurrency(currency) ? currency : undefined,
+      rentPeriod: isRentPeriod(rentPeriod) ? rentPeriod : undefined,
+    }),
+    getFavoriteListingIds(user?.id ?? null),
+  ]);
 
   return (
     <section className="container py-10 sm:py-14">
@@ -76,7 +81,7 @@ export default async function HomePage({ searchParams }: HomePageProps) {
               className="animate-fade-up"
               style={{ animationDelay: `${index * 60}ms` }}
             >
-              <ListingCard listing={listing} />
+              <ListingCard listing={listing} favorited={favoriteIds.has(listing.id)} />
             </div>
           ))}
         </div>

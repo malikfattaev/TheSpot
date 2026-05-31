@@ -183,3 +183,46 @@ export async function getListingById(id: string): Promise<ListingDetail | null> 
     return null;
   }
 }
+
+/** Published listings a user saved to favorites, newest save first. */
+export async function getFavoriteListings(userId: string): Promise<ListingCardData[]> {
+  if (!process.env.DATABASE_URL) {
+    return [];
+  }
+
+  try {
+    const { prisma } = await import('@thespot/db');
+    const favorites = await prisma.favorite.findMany({
+      // Only surface still-published listings so saved cards never dead-link.
+      where: { userId, listing: { status: 'PUBLISHED' } },
+      orderBy: { createdAt: 'desc' },
+      select: { listing: { select: cardSelect } },
+    });
+
+    return favorites.map((favorite) => toCard(favorite.listing));
+  } catch {
+    return [];
+  }
+}
+
+/**
+ * The set of listing IDs a user has favorited, for rendering filled/empty
+ * hearts across the feed. Returns an empty set when signed out or on error.
+ */
+export async function getFavoriteListingIds(userId: string | null): Promise<Set<string>> {
+  if (!userId || !process.env.DATABASE_URL) {
+    return new Set();
+  }
+
+  try {
+    const { prisma } = await import('@thespot/db');
+    const favorites = await prisma.favorite.findMany({
+      where: { userId },
+      select: { listingId: true },
+    });
+
+    return new Set(favorites.map((favorite) => favorite.listingId));
+  } catch {
+    return new Set();
+  }
+}

@@ -177,7 +177,8 @@
     "confirmDelete": "O‘chirish",
     "cancel": "Bekor qilish",
     "logout": "Chiqish",
-    "login": "Kirish"
+    "login": "Kirish",
+    "favorites": "Saqlanganlar"
   },
   "Login": {
     "title": "Kirish",
@@ -258,5 +259,11 @@
     "title": "Filtr",
     "apply": "Qo‘llash",
     "reset": "Tozalash"
+  },
+  "Favorites": {
+    "title": "Saqlanganlar",
+    "empty": "Siz hali hech narsa saqlamadingiz.",
+    "add": "Saqlash",
+    "remove": "Saqlanganlardan olib tashlash"
   }
 }
