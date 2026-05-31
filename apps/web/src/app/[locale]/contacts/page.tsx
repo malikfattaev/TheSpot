@@ -29,7 +29,7 @@ export default async function ContactsPage() {
   ] as const;
 
   return (
-    <section className="container py-20">
+    <section className="container py-14 sm:py-20">
       <h1 className="animate-fade-up text-3xl font-extrabold tracking-tight sm:text-4xl">
         {t('title')}
       </h1>

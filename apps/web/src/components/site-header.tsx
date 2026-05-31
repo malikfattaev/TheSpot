@@ -8,7 +8,7 @@ export async function SiteHeader() {
 
   return (
     <header className="relative z-50 w-full">
-      <div className="container flex h-20 items-center justify-between gap-6">
+      <div className="container flex h-16 items-center justify-between gap-4 sm:h-20 sm:gap-6">
         <Link href="/" className="text-xl font-semibold tracking-tight">
           The Spot
         </Link>

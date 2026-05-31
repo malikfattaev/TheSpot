@@ -32,9 +32,9 @@ export default async function AboutPage() {
 
   return (
     <section className="container">
-      <div className="flex flex-col items-center gap-7 py-24 text-center sm:py-32">
+      <div className="flex flex-col items-center gap-7 py-16 text-center sm:py-32">
         <h1
-          className="animate-fade-up max-w-3xl text-5xl font-semibold tracking-tight sm:text-6xl"
+          className="animate-fade-up max-w-3xl text-4xl font-semibold tracking-tight sm:text-6xl"
           style={{ animationDelay: '40ms' }}
         >
           {t('heroTitle')}
@@ -61,7 +61,7 @@ export default async function AboutPage() {
           ) : null}
         </div>
 
-        <div className="mt-14 grid w-full max-w-4xl gap-4 sm:grid-cols-3">
+        <div className="mt-8 grid w-full max-w-4xl gap-4 sm:mt-14 sm:grid-cols-3">
           {features.map(({ key, icon: Icon }, index) => (
             <article
               key={key}

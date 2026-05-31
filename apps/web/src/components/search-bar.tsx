@@ -44,7 +44,7 @@ export function SearchBar() {
   return (
     <form
       onSubmit={handleSubmit}
-      className="surface shadow-soft flex flex-col gap-2 rounded-3xl p-2 sm:flex-row sm:items-center sm:rounded-full"
+      className="surface shadow-soft grid grid-cols-2 gap-2 rounded-3xl p-2 sm:flex sm:flex-row sm:items-center sm:rounded-full"
     >
       <select
         value={district}
@@ -112,7 +112,7 @@ export function SearchBar() {
           ))}
         </select>
       </div>
-      <Button type="submit" className="shrink-0">
+      <Button type="submit" className="col-span-2 h-12 w-full sm:h-11 sm:w-auto sm:shrink-0">
         <Search className="h-4 w-4" aria-hidden />
         {t('submit')}
       </Button>
