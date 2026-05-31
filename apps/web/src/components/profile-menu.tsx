@@ -7,6 +7,7 @@ import { canPublishListings } from '@thespot/db/roles';
 import { signOut } from '@/app/[locale]/login/actions';
 import { Link } from '@/i18n/navigation';
 import type { SessionUser } from '@/lib/session';
+import { formatPhone } from '@/lib/phone-format';
 import { buttonVariants } from './ui/button';
 
 function getInitials(name: string): string {
@@ -80,7 +81,7 @@ export function ProfileMenu({ user }: { user: SessionUser | null }) {
           <div className="px-3 py-2">
             <p className="font-semibold leading-tight">{user.fullName}</p>
             <p className="text-muted-foreground mt-1 text-sm">{tRoles(user.role)}</p>
-            <p className="text-muted-foreground text-sm">{user.phone}</p>
+            <p className="text-muted-foreground text-sm">{formatPhone(user.phone)}</p>
           </div>
 
           <div className="bg-border my-1 h-px" />

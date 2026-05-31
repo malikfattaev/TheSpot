@@ -8,6 +8,7 @@ import { FavoriteButton } from '@/components/favorite-button';
 import { getFavoriteListingIds, getListingById } from '@/lib/data/listings';
 import { getCurrentUser } from '@/lib/session';
 import { formatPrice } from '@/lib/format';
+import { formatPhone } from '@/lib/phone-format';
 import { telegramUrl } from '@/lib/telegram';
 
 export const dynamic = 'force-dynamic';
@@ -84,7 +85,7 @@ export default async function ListingPage({ params }: ListingPageProps) {
         ) : null}
       </div>
 
-      <div className="mt-8 grid gap-8 lg:grid-cols-[1fr_320px] lg:items-stretch">
+      <div className="mt-8 grid gap-8 lg:grid-cols-[1fr_320px]">
         <div className="animate-fade-up min-w-0" style={{ animationDelay: '60ms' }}>
           {districtLabel || listing.address ? (
             <p className="text-muted-foreground flex flex-wrap items-center gap-1.5 text-sm font-medium">
@@ -116,29 +117,31 @@ export default async function ListingPage({ params }: ListingPageProps) {
         </div>
 
         <aside className="animate-fade-up" style={{ animationDelay: '120ms' }}>
-          <div className="surface flex flex-col rounded-3xl p-6 lg:h-full">
-            <p className="text-muted-foreground text-xs font-medium uppercase tracking-wide">
-              {t('owner')}
-            </p>
-            <div className="mt-3 flex items-center gap-3">
-              <span className="bg-primary text-primary-foreground flex h-11 w-11 items-center justify-center rounded-full text-sm font-semibold">
-                {getInitials(listing.owner.fullName)}
-              </span>
-              <div className="min-w-0">
-                <p className="truncate font-semibold">{listing.owner.fullName}</p>
-                <p className="text-muted-foreground text-sm">{tRoles(listing.owner.role)}</p>
+          <div className="surface flex flex-col gap-6 rounded-3xl p-6">
+            <div>
+              <p className="text-muted-foreground text-xs font-medium uppercase tracking-wide">
+                {t('owner')}
+              </p>
+              <div className="mt-4 flex items-center gap-3">
+                <span className="bg-primary text-primary-foreground flex h-11 w-11 shrink-0 items-center justify-center rounded-full text-sm font-semibold">
+                  {getInitials(listing.owner.fullName)}
+                </span>
+                <div className="min-w-0">
+                  <p className="truncate font-semibold">{listing.owner.fullName}</p>
+                  <p className="text-muted-foreground text-sm">{tRoles(listing.owner.role)}</p>
+                </div>
               </div>
             </div>
 
             {listing.owner.phone || listing.owner.telegramUsername ? (
-              <div className="mt-6 flex flex-col gap-2 lg:mt-auto">
+              <div className="flex flex-col gap-3">
                 {listing.owner.phone ? (
                   <a
                     href={`tel:${listing.owner.phone}`}
                     className="bg-primary text-primary-foreground ease-smooth flex h-12 w-full items-center justify-center gap-2 rounded-full text-sm font-medium transition-all duration-300 hover:opacity-90"
                   >
-                    <Phone className="h-4 w-4" aria-hidden />
-                    {listing.owner.phone}
+                    <Phone className="h-4 w-4 shrink-0" aria-hidden />
+                    {formatPhone(listing.owner.phone)}
                   </a>
                 ) : null}
                 {listing.owner.telegramUsername ? (
@@ -150,7 +153,8 @@ export default async function ListingPage({ params }: ListingPageProps) {
                     title={t('writeTelegram')}
                     className="border-foreground/20 text-foreground ease-smooth hover:bg-foreground/5 flex h-12 w-full items-center justify-center gap-2 rounded-full border text-sm font-medium transition-all duration-300"
                   >
-                    <Send className="h-4 w-4" aria-hidden />@{listing.owner.telegramUsername}
+                    <Send className="h-4 w-4 shrink-0" aria-hidden />
+                    <span className="truncate">@{listing.owner.telegramUsername}</span>
                   </a>
                 ) : null}
               </div>

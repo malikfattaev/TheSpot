@@ -64,6 +64,8 @@
     "districtSuffix": "tumani",
     "owner": "Egasi",
     "writeTelegram": "Telegramda yozish",
+    "prevPhoto": "Oldingi rasm",
+    "nextPhoto": "Keyingi rasm",
     "types": {
       "APARTMENT": "Kvartira",
       "ROOM": "Xona",

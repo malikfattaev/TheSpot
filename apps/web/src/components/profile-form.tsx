@@ -4,6 +4,7 @@ import { useState, useTransition, type FormEvent } from 'react';
 import { Loader2 } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { updateProfile, type ProfileInput } from '@/app/[locale]/profile/actions';
+import { formatPhone } from '@/lib/phone-format';
 
 const fieldClass =
   'border-border bg-background focus:border-foreground/30 h-12 w-full rounded-2xl border px-4 text-sm outline-none transition-colors';
@@ -69,7 +70,7 @@ export function ProfileForm({ initial }: { initial: ProfileFormInitial }) {
       <label className="grid gap-1.5">
         <span className={labelClass}>{t('phone')}</span>
         <input
-          value={initial.phone}
+          value={formatPhone(initial.phone)}
           readOnly
           disabled
           className={`${fieldClass} text-muted-foreground cursor-not-allowed opacity-70`}

@@ -64,6 +64,8 @@
     "districtSuffix": "район",
     "owner": "Владелец",
     "writeTelegram": "Написать в Telegram",
+    "prevPhoto": "Предыдущее фото",
+    "nextPhoto": "Следующее фото",
     "types": {
       "APARTMENT": "Квартира",
       "ROOM": "Комната",
