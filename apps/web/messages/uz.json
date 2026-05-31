@@ -130,22 +130,28 @@
   },
   "About": {
     "heroTitle": "O‘z joyingizni toping",
-    "heroSubtitle": "O‘zbekiston bo‘ylab kvartira ijarasi - tez, qulay va vositachilarsiz.",
+    "heroSubtitle": "O‘zbekiston bo‘ylab kvartira ijarasi — qulay, vositachilarsiz va majburiy ro‘yxatdan o‘tishsiz.",
     "ctaBrowse": "E’lonlarni ko‘rish",
     "ctaPost": "Uy joylash",
+    "ctaRegister": "Ro‘yxatdan o‘tish",
     "features": {
-      "search": {
-        "title": "Aqlli qidiruv",
-        "description": "Shahar, narx va xonalar soni bo‘yicha filtrlar."
-      },
       "verified": {
-        "title": "Tasdiqlangan egalar",
-        "description": "E’lonlar haqiqiy uy egalaridan."
+        "title": "Tasdiqlangan egalar va rieltorlar",
+        "description": "E’lonlar faqat haqiqiy, tasdiqlangan uy egalari va ijaraga beruvchilardan."
       },
-      "noFee": {
-        "title": "Vositachilarsiz",
-        "description": "Yashirin to‘lovlar va ortiqcha xarajatlarsiz."
+      "listings": {
+        "title": "Ko‘p e’lonlar",
+        "description": "O‘zbekiston bo‘ylab katta tanlov — tanlash uchun doim nimadir bor."
+      },
+      "contact": {
+        "title": "Tezkor aloqa",
+        "description": "To‘g‘ridan-to‘g‘ri yozing va qo‘ng‘iroq qiling — telefon yoki Telegram orqali, vositachilarsiz."
       }
+    },
+    "ux": {
+      "title": "Har bir foydalanuvchi uchun qulay",
+      "body": "Biz vaqtingiz va qulayligingizni qadrlaymiz. Kvartira topmoqchimisiz — shunchaki e’lonlarni ko‘ring va egalari bilan bog‘laning. Buning uchun ro‘yxatdan o‘tish shart emas.",
+      "note": "Agar ro‘yxatdan o‘tsangiz — juda xursand bo‘lamiz: «saqlanganlar» va o‘z e’lonlaringizni joylash imkoni paydo bo‘ladi. Bu biz uchun muhim."
     }
   },
   "Roles": {

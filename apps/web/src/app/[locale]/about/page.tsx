@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { BadgeCheck, HandCoins, Search } from 'lucide-react';
+import { BadgeCheck, Building2, MessagesSquare } from 'lucide-react';
 import { getTranslations } from 'next-intl/server';
 import { canPublishListings } from '@thespot/db/roles';
 import { buttonVariants } from '@/components/ui/button';
@@ -19,9 +19,9 @@ export async function generateMetadata({ params }: AboutPageProps): Promise<Meta
 }
 
 const features = [
-  { key: 'search', icon: Search },
   { key: 'verified', icon: BadgeCheck },
-  { key: 'noFee', icon: HandCoins },
+  { key: 'listings', icon: Building2 },
+  { key: 'contact', icon: MessagesSquare },
 ] as const;
 
 export default async function AboutPage() {
@@ -77,6 +77,20 @@ export default async function AboutPage() {
               </p>
             </article>
           ))}
+        </div>
+
+        <div
+          className="surface animate-fade-up mt-6 w-full max-w-3xl rounded-3xl p-8 sm:mt-10 sm:p-10"
+          style={{ animationDelay: '520ms' }}
+        >
+          <h2 className="text-2xl font-semibold tracking-tight sm:text-3xl">{t('ux.title')}</h2>
+          <p className="text-muted-foreground mt-4 leading-7">{t('ux.body')}</p>
+          <p className="text-muted-foreground mt-3 leading-7">{t('ux.note')}</p>
+          {!user ? (
+            <Link href="/register" className={`${buttonVariants({ size: 'lg' })} mt-6`}>
+              {t('ctaRegister')}
+            </Link>
+          ) : null}
         </div>
       </div>
     </section>
