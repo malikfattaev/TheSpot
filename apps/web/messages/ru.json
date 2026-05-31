@@ -182,7 +182,7 @@
     "logout": "Выйти",
     "login": "Войти",
     "favorites": "Избранное",
-    "editProfile": "Изменить профиль"
+    "settings": "Настройки"
   },
   "Login": {
     "title": "Вход",

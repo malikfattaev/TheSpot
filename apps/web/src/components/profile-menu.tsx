@@ -85,10 +85,6 @@ export function ProfileMenu({ user }: { user: SessionUser | null }) {
           </div>
 
           <div className="bg-border my-1 h-px" />
-          <Link href="/profile" role="menuitem" onClick={close} className={itemClass}>
-            <Settings className="text-muted-foreground h-4 w-4" aria-hidden />
-            {t('editProfile')}
-          </Link>
           <Link href="/favorites" role="menuitem" onClick={close} className={itemClass}>
             <Heart className="text-muted-foreground h-4 w-4" aria-hidden />
             {t('favorites')}
@@ -118,6 +114,10 @@ export function ProfileMenu({ user }: { user: SessionUser | null }) {
           </Link>
 
           <div className="bg-border my-1 h-px" />
+          <Link href="/profile" role="menuitem" onClick={close} className={itemClass}>
+            <Settings className="text-muted-foreground h-4 w-4" aria-hidden />
+            {t('settings')}
+          </Link>
           <form action={signOut}>
             <input type="hidden" name="locale" value={locale} />
             <button
