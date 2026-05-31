@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
-import { LayoutList, LogOut } from 'lucide-react';
+import { Info, LayoutList, LogOut, Phone, Plus } from 'lucide-react';
 import { useLocale, useTranslations } from 'next-intl';
 import { canPublishListings } from '@thespot/db/roles';
 import { signOut } from '@/app/[locale]/login/actions';
@@ -19,12 +19,17 @@ function getInitials(name: string): string {
     .toUpperCase();
 }
 
+const itemClass =
+  'hover:bg-foreground/5 flex items-center gap-2.5 rounded-xl px-3 py-2 text-sm transition-colors duration-200';
+
 export function ProfileMenu({ user }: { user: SessionUser | null }) {
   const t = useTranslations('Profile');
   const tRoles = useTranslations('Roles');
+  const tNav = useTranslations('Nav');
   const locale = useLocale();
   const [open, setOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
+  const close = () => setOpen(false);
 
   useEffect(() => {
     if (!open) return;
@@ -78,20 +83,31 @@ export function ProfileMenu({ user }: { user: SessionUser | null }) {
             <p className="text-muted-foreground text-sm">{user.phone}</p>
           </div>
 
-          <div className="bg-border my-1 h-px" />
-
           {canPublishListings(user.role) && (
-            <Link
-              href="/profile/listings"
-              role="menuitem"
-              onClick={() => setOpen(false)}
-              className="hover:bg-foreground/5 flex items-center gap-2.5 rounded-xl px-3 py-2 text-sm transition-colors duration-200"
-            >
-              <LayoutList className="text-muted-foreground h-4 w-4" aria-hidden />
-              {t('myListings')}
-            </Link>
+            <>
+              <div className="bg-border my-1 h-px" />
+              <Link href="/profile/listings" role="menuitem" onClick={close} className={itemClass}>
+                <LayoutList className="text-muted-foreground h-4 w-4" aria-hidden />
+                {t('myListings')}
+              </Link>
+              <Link href="/listings/new" role="menuitem" onClick={close} className={itemClass}>
+                <Plus className="text-muted-foreground h-4 w-4" aria-hidden />
+                {t('addListing')}
+              </Link>
+            </>
           )}
 
+          <div className="bg-border my-1 h-px" />
+          <Link href="/contacts" role="menuitem" onClick={close} className={itemClass}>
+            <Phone className="text-muted-foreground h-4 w-4" aria-hidden />
+            {tNav('contacts')}
+          </Link>
+          <Link href="/about" role="menuitem" onClick={close} className={itemClass}>
+            <Info className="text-muted-foreground h-4 w-4" aria-hidden />
+            {tNav('about')}
+          </Link>
+
+          <div className="bg-border my-1 h-px" />
           <form action={signOut}>
             <input type="hidden" name="locale" value={locale} />
             <button
