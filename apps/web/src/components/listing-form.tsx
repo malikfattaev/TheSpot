@@ -5,6 +5,7 @@ import { ImagePlus, Loader2, X } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { useRouter } from '@/i18n/navigation';
 import { createListing, updateListing, type ListingInput } from '@/app/[locale]/listings/actions';
+import { mediaSrc } from '@/lib/media';
 import { cn } from '@/lib/utils';
 
 const PROPERTY_TYPES = ['APARTMENT', 'ROOM', 'HOUSE', 'STUDIO', 'COMMERCIAL'] as const;
@@ -191,7 +192,7 @@ export function ListingForm({ locale, mode, listingId, initial }: ListingFormPro
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src={photo.kind === 'existing' ? photo.url : photo.preview}
+                src={photo.kind === 'existing' ? mediaSrc(photo.url) : photo.preview}
                 alt=""
                 className="h-full w-full object-cover"
               />

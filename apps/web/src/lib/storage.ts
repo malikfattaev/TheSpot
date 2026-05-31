@@ -1,11 +1,14 @@
 import { randomUUID } from 'node:crypto';
-import { PutObjectCommand, S3Client } from '@aws-sdk/client-s3';
+import { GetObjectCommand, PutObjectCommand, S3Client } from '@aws-sdk/client-s3';
 
 /**
  * Object storage for listing photos. The bucket is the S3-compatible one
  * provided by Railway; its credentials arrive as `BUCKET_*` service variables.
- * Uploads are server-side (no browser CORS needed) and stored public-read so
- * the direct object URL can be rendered straight from an `<img>`.
+ *
+ * The bucket is private (the provider rejects public-read ACLs), so we never
+ * hand out direct object URLs. Uploads return the object *key*; images are
+ * served back through the `/api/media/[...key]` route, which streams the object
+ * via `GetObject`. The DB therefore stores keys, not URLs.
  */
 
 type StorageConfig = {
@@ -66,15 +69,6 @@ export function isStorageConfigured(): boolean {
   return readConfig() !== null;
 }
 
-function publicUrl(config: StorageConfig, key: string): string {
-  const base = config.endpoint.replace(/\/+$/, '');
-  if (config.forcePathStyle) {
-    return `${base}/${config.bucket}/${key}`;
-  }
-  const url = new URL(base);
-  return `${url.protocol}//${config.bucket}.${url.host}/${key}`;
-}
-
 const EXTENSIONS: Record<string, string> = {
   'image/jpeg': 'jpg',
   'image/png': 'png',
@@ -86,14 +80,15 @@ const EXTENSIONS: Record<string, string> = {
 export const ACCEPTED_IMAGE_TYPES = Object.keys(EXTENSIONS);
 export const MAX_IMAGE_BYTES = 8 * 1024 * 1024; // 8 MB per photo.
 
+/** Object keys always live under this prefix — see `mediaSrc`. */
+export const LISTINGS_PREFIX = 'listings/';
+
 /**
- * Upload one image to the bucket and return its public URL. Throws if storage
- * is not configured or the content type is unsupported.
+ * Upload one image to the (private) bucket and return its object key. The key
+ * is stored in the DB; images are served back through `/api/media/[...key]`.
+ * Throws if storage is not configured or the content type is unsupported.
  */
-export async function uploadListingImage(
-  data: Buffer,
-  contentType: string,
-): Promise<string> {
+export async function uploadListingImage(data: Buffer, contentType: string): Promise<string> {
   const storage = getClient();
   if (!storage) {
     throw new Error('Object storage is not configured.');
@@ -104,17 +99,41 @@ export async function uploadListingImage(
     throw new Error(`Unsupported image type: ${contentType}`);
   }
 
-  const key = `listings/${randomUUID()}.${extension}`;
+  const key = `${LISTINGS_PREFIX}${randomUUID()}.${extension}`;
   await storage.client.send(
     new PutObjectCommand({
       Bucket: storage.config.bucket,
       Key: key,
       Body: data,
       ContentType: contentType,
-      ACL: 'public-read',
       CacheControl: 'public, max-age=31536000, immutable',
     }),
   );
 
-  return publicUrl(storage.config, key);
+  return key;
+}
+
+export type StoredObject = {
+  body: Uint8Array;
+  contentType: string;
+};
+
+/** Fetch a stored object's bytes for streaming back to the browser. */
+export async function getListingObject(key: string): Promise<StoredObject | null> {
+  const storage = getClient();
+  if (!storage) return null;
+
+  try {
+    const result = await storage.client.send(
+      new GetObjectCommand({ Bucket: storage.config.bucket, Key: key }),
+    );
+    if (!result.Body) return null;
+
+    return {
+      body: await result.Body.transformToByteArray(),
+      contentType: result.ContentType ?? 'application/octet-stream',
+    };
+  } catch {
+    return null;
+  }
 }

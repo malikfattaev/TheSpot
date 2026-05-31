@@ -22,7 +22,8 @@ const listingSchema = z.object({
   price: z.coerce.number().positive().max(1_000_000_000_000),
   currency: z.enum(['UZS', 'USD']),
   publish: z.boolean().default(true),
-  imageUrls: z.array(z.string().url()).max(12).default([]),
+  // Object keys (e.g. `listings/<uuid>.jpg`), not URLs — see `lib/storage`.
+  imageUrls: z.array(z.string().min(1).max(300)).max(12).default([]),
 });
 
 /**

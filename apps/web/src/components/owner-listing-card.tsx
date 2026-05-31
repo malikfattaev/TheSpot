@@ -7,6 +7,7 @@ import { Link, useRouter } from '@/i18n/navigation';
 import { deleteListing } from '@/app/[locale]/listings/actions';
 import type { OwnerListingData } from '@/lib/data/listings';
 import { formatPrice } from '@/lib/format';
+import { mediaSrc } from '@/lib/media';
 import { cn } from '@/lib/utils';
 
 const STATUS_STYLES: Record<OwnerListingData['status'], string> = {
@@ -42,7 +43,7 @@ export function OwnerListingCard({ listing }: { listing: OwnerListingData }) {
       >
         {listing.imageUrl ? (
           // eslint-disable-next-line @next/next/no-img-element
-          <img src={listing.imageUrl} alt="" className="h-full w-full object-cover" />
+          <img src={mediaSrc(listing.imageUrl)} alt="" className="h-full w-full object-cover" />
         ) : (
           <div className="from-secondary to-accent h-full w-full bg-gradient-to-br" />
         )}

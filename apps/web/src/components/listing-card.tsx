@@ -2,6 +2,7 @@ import { useLocale, useTranslations } from 'next-intl';
 import { Link } from '@/i18n/navigation';
 import type { ListingCardData } from '@/lib/data/listings';
 import { formatPrice } from '@/lib/format';
+import { mediaSrc } from '@/lib/media';
 
 export function ListingCard({ listing }: { listing: ListingCardData }) {
   const t = useTranslations('ListingCard');
@@ -22,7 +23,7 @@ export function ListingCard({ listing }: { listing: ListingCardData }) {
         {listing.imageUrl ? (
           // eslint-disable-next-line @next/next/no-img-element
           <img
-            src={listing.imageUrl}
+            src={mediaSrc(listing.imageUrl)}
             alt={listing.title}
             className="ease-smooth h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
           />

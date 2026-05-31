@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { mediaSrc } from '@/lib/media';
 import { cn } from '@/lib/utils';
 
 type GalleryImage = { id: string; url: string; alt: string | null };
@@ -18,7 +19,7 @@ export function ListingGallery({ images, title }: { images: GalleryImage[]; titl
     <div className="grid gap-3">
       <div className="bg-secondary aspect-[16/9] w-full overflow-hidden rounded-3xl">
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={current.url} alt={current.alt ?? title} className="h-full w-full object-cover" />
+        <img src={mediaSrc(current.url)} alt={current.alt ?? title} className="h-full w-full object-cover" />
       </div>
 
       {images.length > 1 && (
@@ -34,7 +35,7 @@ export function ListingGallery({ images, title }: { images: GalleryImage[]; titl
               )}
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={image.url} alt="" className="h-full w-full object-cover" />
+              <img src={mediaSrc(image.url)} alt="" className="h-full w-full object-cover" />
             </button>
           ))}
         </div>
