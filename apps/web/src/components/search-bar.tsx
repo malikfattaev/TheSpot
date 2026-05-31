@@ -25,7 +25,7 @@ export function SearchBar() {
     if (rooms) params.set('rooms', rooms);
     if (maxPrice) params.set('maxPrice', maxPrice);
     const query = params.toString();
-    router.push(query ? `/listings?${query}` : '/listings');
+    router.push(query ? `/?${query}` : '/');
   }
 
   return (

@@ -30,6 +30,9 @@ npm-debug.log*
 !.vscode/extensions.json
 *.pem
 
+# Claude Code
+.claude/
+
 # Testing
 coverage/
 

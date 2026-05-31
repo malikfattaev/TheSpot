@@ -1,29 +1,27 @@
-import type { Metadata } from 'next';
-import { getTranslations } from 'next-intl/server';
+import { redirect } from 'next/navigation';
 
 export const dynamic = 'force-dynamic';
 
 type ListingsPageProps = {
   params: Promise<{ locale: string }>;
+  searchParams: Promise<Record<string, string | string[] | undefined>>;
 };
 
-export async function generateMetadata({ params }: ListingsPageProps): Promise<Metadata> {
+/**
+ * The home page is the listings feed, so `/listings` is just an alias — forward
+ * any incoming filters there. Individual listings live at `/listings/[id]`.
+ */
+export default async function ListingsPage({ params, searchParams }: ListingsPageProps) {
   const { locale } = await params;
-  const t = await getTranslations({ locale, namespace: 'Listings' });
-  return { title: t('title') };
-}
+  const sp = await searchParams;
 
-export default async function ListingsPage() {
-  const t = await getTranslations('Listings');
+  const query = new URLSearchParams();
+  for (const key of ['rooms', 'district', 'maxPrice']) {
+    const value = sp[key];
+    const single = Array.isArray(value) ? value[0] : value;
+    if (single) query.set(key, single);
+  }
 
-  return (
-    <section className="container py-20">
-      <h1 className="animate-fade-up text-3xl font-extrabold tracking-tight sm:text-4xl">
-        {t('title')}
-      </h1>
-      <div className="surface animate-fade-up text-muted-foreground mt-8 rounded-3xl p-12 text-center">
-        {t('empty')}
-      </div>
-    </section>
-  );
+  const suffix = query.toString();
+  redirect(`/${locale}${suffix ? `?${suffix}` : ''}`);
 }

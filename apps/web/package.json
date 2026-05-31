@@ -11,6 +11,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "@aws-sdk/client-s3": "^3.726.0",
     "@thespot/config": "*",
     "@thespot/db": "*",
     "clsx": "^2.1.1",

@@ -25,12 +25,92 @@
     "empty": "Hozircha e’lonlar yo‘q. Keyinroq qarang."
   },
   "PostListing": {
-    "title": "E’lon joylash",
-    "subtitle": "Uy joylash formasi shu yerda paydo bo‘ladi. Uy egalari va rieltorlar uchun."
+    "title": "Yangi e’lon",
+    "createSubtitle": "Uy haqidagi ma’lumotlarni to‘ldiring - va u umumiy ro‘yxatda paydo bo‘ladi.",
+    "back": "Mening e’lonlarim"
+  },
+  "EditListing": {
+    "title": "E’lonni tahrirlash",
+    "back": "Mening e’lonlarim"
   },
   "ListingCard": {
     "rooms": "{count} xona",
+    "areaUnit": "m²",
+    "floor": "{floor}-qavat",
     "perMonth": "/oy"
+  },
+  "ListingStatus": {
+    "PUBLISHED": "E’lon qilingan",
+    "DRAFT": "Qoralama",
+    "ARCHIVED": "Arxivda"
+  },
+  "Listing": {
+    "back": "Barcha e’lonlar",
+    "perMonth": "/oy",
+    "rooms": "Xonalar",
+    "area": "Maydon",
+    "areaUnit": "m²",
+    "floor": "Qavat",
+    "type": "Turi",
+    "description": "Tavsif",
+    "address": "Manzil",
+    "owner": "Egasi",
+    "types": {
+      "APARTMENT": "Kvartira",
+      "ROOM": "Xona",
+      "HOUSE": "Uy",
+      "STUDIO": "Studiya",
+      "COMMERCIAL": "Tijorat"
+    }
+  },
+  "ListingForm": {
+    "photos": "Rasmlar",
+    "photosHint": "12 tagacha rasm qo‘shing. Birinchisi muqova bo‘ladi.",
+    "addPhoto": "Qo‘shish",
+    "removePhoto": "Rasmni o‘chirish",
+    "title": "Sarlavha",
+    "titlePlaceholder": "Markazda shinam bir xonali",
+    "description": "Tavsif",
+    "descriptionPlaceholder": "Kvartira, tuman va ijara shartlari haqida yozing...",
+    "type": "Uy turi",
+    "rooms": "Xonalar",
+    "area": "Maydon, m²",
+    "floor": "Qavat",
+    "city": "Shahar",
+    "district": "Tuman",
+    "districtPlaceholder": "Mirobod",
+    "address": "Manzil",
+    "addressPlaceholder": "ko‘cha, uy",
+    "price": "Oylik narx",
+    "currency": "Valyuta",
+    "publishNow": "Darhol e’lon qilish",
+    "publishHint": "E’lon darhol umumiy ro‘yxatda paydo bo‘ladi. Qoralama sifatida saqlash uchun belgini olib tashlang.",
+    "publish": "E’lon qilish",
+    "save": "Saqlash",
+    "saving": "Saqlanmoqda...",
+    "uploading": "Rasm yuklanmoqda...",
+    "cancel": "Bekor qilish",
+    "types": {
+      "APARTMENT": "Kvartira",
+      "ROOM": "Xona",
+      "HOUSE": "Uy",
+      "STUDIO": "Studiya",
+      "COMMERCIAL": "Tijorat"
+    },
+    "errors": {
+      "invalidFields": "Maydonlarni to‘g‘ri to‘ldiring.",
+      "forbidden": "Ruxsat yetarli emas.",
+      "unauthorized": "Akkauntga kiring.",
+      "databaseUnavailable": "Ma’lumotlar bazasi vaqtincha mavjud emas.",
+      "notFound": "E’lon topilmadi.",
+      "storageUnavailable": "Rasm ombori mavjud emas.",
+      "uploadFailed": "Rasmni yuklab bo‘lmadi.",
+      "invalidType": "Rasm formati qo‘llab-quvvatlanmaydi.",
+      "tooLarge": "Rasm juda katta (maks. 8 MB).",
+      "tooManyFiles": "Rasm juda ko‘p.",
+      "noFiles": "Rasm tanlang.",
+      "unknown": "Nimadir xato ketdi."
+    }
   },
   "About": {
     "heroTitle": "O‘z joyingizni toping",
@@ -61,6 +141,13 @@
   "Profile": {
     "menu": "Profil",
     "myListings": "Mening e’lonlarim",
+    "addListing": "E’lon qo‘shish",
+    "addFirstListing": "E’lon yaratish",
+    "noListings": "Sizda hali e’lonlar yo‘q.",
+    "edit": "Tahrirlash",
+    "delete": "O‘chirish",
+    "confirmDelete": "O‘chirish",
+    "cancel": "Bekor qilish",
     "logout": "Chiqish",
     "login": "Kirish"
   },
