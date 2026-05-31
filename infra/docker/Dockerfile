@@ -58,6 +58,13 @@ COPY --from=builder --chown=nextjs:nodejs /app/apps/${APP}/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/apps/${APP}/.next/static ./apps/${APP}/.next/static
 COPY --from=builder --chown=nextjs:nodejs /app/apps/${APP}/public ./apps/${APP}/public
 
+# `sharp` loads its native binary via a dynamic require of `@img/sharp-<platform>`,
+# which Next's standalone file tracing can't follow — so copy sharp and its
+# platform packages into the standalone node_modules explicitly. Without this
+# the server crashes at first image upload with "Cannot find module sharp".
+COPY --from=builder --chown=nextjs:nodejs /app/node_modules/sharp ./node_modules/sharp
+COPY --from=builder --chown=nextjs:nodejs /app/node_modules/@img ./node_modules/@img
+
 # Prisma migrator: kept separate from the slim standalone runtime so the CLI
 # has its *complete* dependency closure (it pulls in @prisma/config -> effect
 # and friends that the standalone trace omits). Copying the full node_modules
