@@ -66,29 +66,30 @@ export function SearchBar() {
         ))}
       </select>
       <div className="bg-border hidden h-6 w-px sm:block" />
-      <input
-        value={maxPrice}
-        onChange={(event) => setMaxPrice(event.target.value)}
-        type="number"
-        inputMode="numeric"
-        min={0}
-        placeholder={t('price')}
-        aria-label={t('price')}
-        className={`${fieldClass} rounded-full sm:w-32`}
-      />
-      <select
-        value={currency}
-        onChange={(event) => setCurrency(event.target.value)}
-        aria-label={t('currency')}
-        className={`${fieldClass} rounded-full ${currency ? '' : 'text-muted-foreground'}`}
-      >
-        <option value="">{t('anyCurrency')}</option>
-        {CURRENCY_OPTIONS.map((value) => (
-          <option key={value} value={value}>
-            {value}
-          </option>
-        ))}
-      </select>
+      <div className="flex items-center sm:w-44">
+        <input
+          value={maxPrice}
+          onChange={(event) => setMaxPrice(event.target.value)}
+          type="number"
+          inputMode="numeric"
+          min={0}
+          placeholder={t('price')}
+          aria-label={t('price')}
+          className={`${fieldClass} min-w-0 flex-1 rounded-l-full pr-1`}
+        />
+        <select
+          value={currency}
+          onChange={(event) => setCurrency(event.target.value)}
+          aria-label={t('currency')}
+          className="text-muted-foreground hover:text-foreground ease-smooth h-9 cursor-pointer rounded-full bg-transparent pl-1 pr-2 text-sm outline-none transition-colors duration-200"
+        >
+          {CURRENCY_OPTIONS.map((value) => (
+            <option key={value} value={value}>
+              {value}
+            </option>
+          ))}
+        </select>
+      </div>
       <Button type="submit" className="shrink-0">
         <Search className="h-4 w-4" aria-hidden />
         {t('submit')}
