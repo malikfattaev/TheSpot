@@ -70,7 +70,7 @@ export default async function ListingPage({ params }: ListingPageProps) {
         <ListingGallery images={listing.images} title={listing.title} />
       </div>
 
-      <div className="mt-8 grid items-stretch gap-8 lg:grid-cols-[1fr_320px]">
+      <div className="mt-8 grid gap-8 lg:grid-cols-[1fr_320px] lg:items-stretch">
         <div className="animate-fade-up min-w-0" style={{ animationDelay: '60ms' }}>
           {districtLabel || listing.address ? (
             <p className="text-muted-foreground flex flex-wrap items-center gap-1.5 text-sm font-medium">
@@ -102,7 +102,7 @@ export default async function ListingPage({ params }: ListingPageProps) {
         </div>
 
         <aside className="animate-fade-up" style={{ animationDelay: '120ms' }}>
-          <div className="surface flex h-full flex-col rounded-3xl p-6">
+          <div className="surface flex flex-col rounded-3xl p-6 lg:h-full">
             <p className="text-muted-foreground text-xs font-medium uppercase tracking-wide">
               {t('owner')}
             </p>
@@ -119,7 +119,7 @@ export default async function ListingPage({ params }: ListingPageProps) {
             {listing.owner.phone ? (
               <a
                 href={`tel:${listing.owner.phone}`}
-                className="bg-primary text-primary-foreground ease-smooth mt-auto flex h-12 w-full items-center justify-center gap-2 rounded-full text-sm font-medium transition-all duration-300 hover:opacity-90"
+                className="bg-primary text-primary-foreground ease-smooth mt-6 flex h-12 w-full items-center justify-center gap-2 rounded-full text-sm font-medium transition-all duration-300 hover:opacity-90 lg:mt-auto"
               >
                 <Phone className="h-4 w-4" aria-hidden />
                 {listing.owner.phone}
