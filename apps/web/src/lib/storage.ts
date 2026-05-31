@@ -34,7 +34,8 @@ function readConfig(): StorageConfig | null {
     region: process.env.BUCKET_REGION ?? 'auto',
     accessKeyId,
     secretAccessKey,
-    forcePathStyle: (process.env.BUCKET_URL_STYLE ?? 'path') !== 'virtual',
+    // Railway sets `virtual-host`; anything not virtual-hosted is path style.
+    forcePathStyle: !(process.env.BUCKET_URL_STYLE ?? 'path').startsWith('virtual'),
   };
 }
 
