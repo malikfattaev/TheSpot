@@ -157,7 +157,7 @@ export function ListingsFilter() {
                   value={currency}
                   onChange={(event) => setCurrency(event.target.value)}
                   aria-label={t('currency')}
-                  className="border-border text-muted-foreground hover:text-foreground h-full cursor-pointer rounded-r-xl border-l bg-transparent px-2 text-sm outline-none transition-colors duration-200"
+                  className="border-border text-muted-foreground hover:text-foreground h-full cursor-pointer appearance-none rounded-r-xl border-l bg-transparent px-3 text-center text-sm font-medium outline-none transition-colors duration-200"
                 >
                   {CURRENCY_OPTIONS.map((value) => (
                     <option key={value} value={value}>

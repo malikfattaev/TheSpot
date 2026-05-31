@@ -81,7 +81,7 @@ export function SearchBar() {
           value={currency}
           onChange={(event) => setCurrency(event.target.value)}
           aria-label={t('currency')}
-          className="text-muted-foreground hover:text-foreground ease-smooth h-9 cursor-pointer rounded-full bg-transparent pl-1 pr-2 text-sm outline-none transition-colors duration-200"
+          className="text-muted-foreground hover:text-foreground ease-smooth h-9 cursor-pointer appearance-none rounded-full bg-transparent px-2 text-sm font-medium outline-none transition-colors duration-200"
         >
           {CURRENCY_OPTIONS.map((value) => (
             <option key={value} value={value}>
