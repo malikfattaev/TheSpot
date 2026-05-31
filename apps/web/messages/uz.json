@@ -130,7 +130,7 @@
   },
   "About": {
     "heroTitle": "O‘z joyingizni toping",
-    "heroSubtitle": "O‘zbekiston bo‘ylab kvartira ijarasi — qulay, vositachilarsiz va majburiy ro‘yxatdan o‘tishsiz.",
+    "heroSubtitle": "O‘zbekiston bo‘ylab kvartira ijarasi - qulay, vositachilarsiz va majburiy ro‘yxatdan o‘tishsiz.",
     "features": {
       "verified": {
         "title": "Tasdiqlangan egalar va rieltorlar",
@@ -138,17 +138,17 @@
       },
       "listings": {
         "title": "Ko‘p e’lonlar",
-        "description": "O‘zbekiston bo‘ylab katta tanlov — tanlash uchun doim nimadir bor."
+        "description": "O‘zbekiston bo‘ylab katta tanlov - tanlash uchun doim nimadir bor."
       },
       "contact": {
         "title": "Tezkor aloqa",
-        "description": "To‘g‘ridan-to‘g‘ri yozing va qo‘ng‘iroq qiling — telefon yoki Telegram orqali, vositachilarsiz."
+        "description": "To‘g‘ridan-to‘g‘ri yozing va qo‘ng‘iroq qiling - telefon yoki Telegram orqali, vositachilarsiz."
       }
     },
     "ux": {
       "title": "Har bir foydalanuvchi uchun qulay",
-      "body": "Biz vaqtingiz va qulayligingizni qadrlaymiz. Kvartira topmoqchimisiz — shunchaki e’lonlarni ko‘ring va egalari bilan bog‘laning. Buning uchun ro‘yxatdan o‘tish shart emas.",
-      "note": "Agar ro‘yxatdan o‘tsangiz — juda xursand bo‘lamiz: «saqlanganlar» va o‘z e’lonlaringizni joylash imkoni paydo bo‘ladi. Bu biz uchun muhim."
+      "body": "Biz vaqtingiz va qulayligingizni qadrlaymiz. Kvartira topmoqchimisiz - shunchaki e’lonlarni ko‘ring va egalari bilan bog‘laning. Buning uchun ro‘yxatdan o‘tish shart emas.",
+      "note": "Agar ro‘yxatdan o‘tsangiz - juda xursand bo‘lamiz: «saqlanganlar» va o‘z e’lonlaringizni joylash imkoni paydo bo‘ladi. Bu biz uchun muhim."
     }
   },
   "Roles": {
@@ -189,7 +189,7 @@
   },
   "Login": {
     "title": "Kirish",
-    "subtitle": "Telefon raqamingizni kiriting — tasdiqlash kodini yuboramiz.",
+    "subtitle": "Telefon raqamingizni kiriting - tasdiqlash kodini yuboramiz.",
     "phone": "Telefon raqami",
     "sendCode": "Kod olish",
     "sending": "Yuborilmoqda...",
@@ -211,7 +211,7 @@
   },
   "Register": {
     "title": "Ro‘yxatdan o‘tish",
-    "subtitle": "Ism, telefon va rolingizni kiriting — tasdiqlash kodini yuboramiz.",
+    "subtitle": "Ism, telefon va rolingizni kiriting - tasdiqlash kodini yuboramiz.",
     "firstName": "Ism",
     "lastName": "Familiya",
     "phone": "Telefon raqami",
@@ -281,7 +281,7 @@
     "phone": "Telefon raqami",
     "phoneLocked": "Raqam akkauntga bog‘langan va o‘zgartirilmaydi.",
     "telegram": "Telegram",
-    "telegramHint": "Telegram nikneymi — e’lon orqali siz bilan shu orqali bog‘lanishadi.",
+    "telegramHint": "Telegram nikneymi - e’lon orqali siz bilan shu orqali bog‘lanishadi.",
     "save": "Saqlash",
     "saving": "Saqlanmoqda...",
     "saved": "Profil yangilandi.",

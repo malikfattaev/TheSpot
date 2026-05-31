@@ -11,7 +11,7 @@ export default function DashboardPage() {
     <main className="container py-16">
       <header className="mb-10">
         <h1 className="text-3xl font-bold tracking-tight">Панель управления</h1>
-        <p className="text-muted-foreground mt-2">The Spot ERP — внутренний инструмент команды.</p>
+        <p className="text-muted-foreground mt-2">The Spot ERP - внутренний инструмент команды.</p>
       </header>
 
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">

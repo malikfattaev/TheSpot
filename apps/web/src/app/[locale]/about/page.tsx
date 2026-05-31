@@ -52,12 +52,12 @@ export default async function AboutPage() {
       </div>
 
       <div
-        className="surface animate-fade-up mt-6 max-w-3xl rounded-3xl p-8 sm:p-10"
+        className="surface animate-fade-up mt-6 rounded-3xl p-8 sm:p-10"
         style={{ animationDelay: '360ms' }}
       >
         <h2 className="text-2xl font-semibold tracking-tight sm:text-3xl">{t('ux.title')}</h2>
-        <p className="text-muted-foreground mt-4 leading-7">{t('ux.body')}</p>
-        <p className="text-muted-foreground mt-3 leading-7">{t('ux.note')}</p>
+        <p className="text-muted-foreground mt-4 max-w-3xl leading-7">{t('ux.body')}</p>
+        <p className="text-muted-foreground mt-3 max-w-3xl leading-7">{t('ux.note')}</p>
       </div>
     </section>
   );
