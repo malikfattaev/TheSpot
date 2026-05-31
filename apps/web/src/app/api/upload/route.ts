@@ -53,7 +53,7 @@ export async function POST(request: Request): Promise<Response> {
     const urls = await Promise.all(
       files.map(async (file) => {
         const buffer = Buffer.from(await file.arrayBuffer());
-        return uploadListingImage(buffer, file.type);
+        return uploadListingImage(buffer);
       }),
     );
     return NextResponse.json({ urls });

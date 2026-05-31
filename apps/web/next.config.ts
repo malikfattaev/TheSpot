@@ -16,6 +16,9 @@ const nextConfig: NextConfig = {
   outputFileTracingRoot: path.join(import.meta.dirname, '../..'),
   // Workspace packages ship TypeScript source and are compiled by Next.
   transpilePackages: ['@thespot/db', '@thespot/config'],
+  // `sharp` ships native binaries — keep it external so it isn't bundled and
+  // its platform `.node` files are traced into the standalone output as-is.
+  serverExternalPackages: ['sharp'],
   reactStrictMode: true,
   webpack(config) {
     // Next emits this relative request for its default `_not-found` route when

@@ -8,9 +8,14 @@
 ARG APP=web
 
 # ──────────────────────────────────────────────────────────────────
-FROM node:20-alpine AS base
-# `openssl` and `libc6-compat` are required by the Prisma query engine.
-RUN apk add --no-cache libc6-compat openssl
+# Debian (glibc), not Alpine: `sharp`'s prebuilt binaries for musl aren't in
+# the lockfile, and glibc is the better-supported target for both sharp and
+# the Prisma query engine.
+FROM node:20-bookworm-slim AS base
+# `openssl` is required by the Prisma query engine.
+RUN apt-get update \
+  && apt-get install -y --no-install-recommends openssl \
+  && rm -rf /var/lib/apt/lists/*
 WORKDIR /app
 ENV NEXT_TELEMETRY_DISABLED=1
 
@@ -44,8 +49,8 @@ ARG APP
 ENV NODE_ENV=production
 ENV APP=${APP}
 ENV HOSTNAME=0.0.0.0
-RUN addgroup --system --gid 1001 nodejs \
-  && adduser --system --uid 1001 nextjs
+RUN groupadd --system --gid 1001 nodejs \
+  && useradd --system --uid 1001 --gid nodejs nextjs
 
 # `output: 'standalone'` traces the whole monorepo from the root, so the
 # server entrypoint keeps the apps/<app>/server.js workspace path.
