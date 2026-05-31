@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
 import { notFound } from 'next/navigation';
-import { ArrowLeft, Phone } from 'lucide-react';
+import { ArrowLeft, MapPin, Phone } from 'lucide-react';
 import { Link } from '@/i18n/navigation';
 import { ListingGallery } from '@/components/listing-gallery';
 import { getListingById } from '@/lib/data/listings';
@@ -72,7 +72,13 @@ export default async function ListingPage({ params }: ListingPageProps) {
             </p>
           ) : null}
           <h1 className="mt-1 text-3xl font-semibold tracking-tight sm:text-4xl">{listing.title}</h1>
-          <p className="mt-2 text-2xl font-semibold">
+          {listing.address || listing.city ? (
+            <p className="text-muted-foreground mt-2 flex items-center gap-1.5 text-sm">
+              <MapPin className="h-4 w-4 shrink-0" aria-hidden />
+              {[listing.city, listing.address].filter(Boolean).join(', ')}
+            </p>
+          ) : null}
+          <p className="mt-3 text-2xl font-semibold">
             {formatPrice(listing.price, listing.currency, locale)}
             <span className="text-muted-foreground text-base font-normal">{t('perMonth')}</span>
           </p>
@@ -120,15 +126,6 @@ export default async function ListingPage({ params }: ListingPageProps) {
           {t('description')}
         </h2>
         <p className="mt-2 whitespace-pre-line leading-relaxed">{listing.description}</p>
-
-        {listing.address ? (
-          <div className="mt-6">
-            <h2 className="text-muted-foreground text-xs font-medium uppercase tracking-wide">
-              {t('address')}
-            </h2>
-            <p className="mt-2">{[listing.city, listing.address].filter(Boolean).join(', ')}</p>
-          </div>
-        ) : null}
       </div>
     </section>
   );
