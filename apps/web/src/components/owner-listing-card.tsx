@@ -110,7 +110,8 @@ export function OwnerListingCard({ listing }: { listing: OwnerListingData }) {
             <Link
               href={`/listings/${listing.id}/edit`}
               aria-label={t('edit')}
-              className="border-border text-muted-foreground hover:text-foreground hover:border-foreground/30 flex h-10 w-10 items-center justify-center rounded-full border transition-colors"
+              title={t('edit')}
+              className="border-border text-muted-foreground hover:border-blue-500/40 hover:text-blue-500 flex h-10 w-10 items-center justify-center rounded-full border transition-colors"
             >
               <Pencil className="h-4 w-4" aria-hidden />
             </Link>
