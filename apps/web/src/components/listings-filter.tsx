@@ -24,7 +24,7 @@ export function ListingsFilter() {
   const [rooms, setRooms] = useState(searchParams.get('rooms') ?? '');
   const [district, setDistrict] = useState(searchParams.get('district') ?? '');
   const [maxPrice, setMaxPrice] = useState(searchParams.get('maxPrice') ?? '');
-  const [currency, setCurrency] = useState(searchParams.get('currency') ?? '');
+  const [currency, setCurrency] = useState(searchParams.get('currency') ?? 'UZS');
 
   const activeCount = ['rooms', 'district', 'maxPrice', 'currency'].filter((key) =>
     searchParams.get(key),
@@ -54,8 +54,11 @@ export function ListingsFilter() {
     const params = new URLSearchParams();
     if (rooms) params.set('rooms', rooms);
     if (district) params.set('district', district);
-    if (currency) params.set('currency', currency);
-    if (maxPrice) params.set('maxPrice', maxPrice);
+    // Currency only matters as a constraint when a price ceiling is set.
+    if (maxPrice) {
+      params.set('maxPrice', maxPrice);
+      if (currency) params.set('currency', currency);
+    }
     const query = params.toString();
     router.replace(query ? `${pathname}?${query}` : pathname);
     setOpen(false);
@@ -65,7 +68,7 @@ export function ListingsFilter() {
     setRooms('');
     setDistrict('');
     setMaxPrice('');
-    setCurrency('');
+    setCurrency('UZS');
     router.replace(pathname);
     setOpen(false);
   }
@@ -138,33 +141,31 @@ export function ListingsFilter() {
             </label>
 
             <label className="flex flex-col gap-1.5">
-              <span className="text-muted-foreground text-xs font-medium">{t('currency')}</span>
-              <select
-                value={currency}
-                onChange={(event) => setCurrency(event.target.value)}
-                className={cn(fieldClass, 'appearance-none')}
-              >
-                <option value="">{t('anyCurrency')}</option>
-                {CURRENCY_OPTIONS.map((value) => (
-                  <option key={value} value={value}>
-                    {value}
-                  </option>
-                ))}
-              </select>
-            </label>
-
-            <label className="flex flex-col gap-1.5">
               <span className="text-muted-foreground text-xs font-medium">{t('price')}</span>
-              <input
-                value={maxPrice}
-                onChange={(event) => setMaxPrice(event.target.value)}
-                onKeyDown={(event) => event.key === 'Enter' && apply()}
-                type="number"
-                inputMode="numeric"
-                min={0}
-                placeholder={t('price')}
-                className={fieldClass}
-              />
+              <div className="border-border bg-background focus-within:border-foreground/30 flex h-11 items-center rounded-xl border transition-colors duration-200">
+                <input
+                  value={maxPrice}
+                  onChange={(event) => setMaxPrice(event.target.value)}
+                  onKeyDown={(event) => event.key === 'Enter' && apply()}
+                  type="number"
+                  inputMode="numeric"
+                  min={0}
+                  placeholder={t('price')}
+                  className="h-full min-w-0 flex-1 rounded-l-xl bg-transparent px-3 text-sm outline-none"
+                />
+                <select
+                  value={currency}
+                  onChange={(event) => setCurrency(event.target.value)}
+                  aria-label={t('currency')}
+                  className="border-border text-muted-foreground hover:text-foreground h-full cursor-pointer rounded-r-xl border-l bg-transparent px-2 text-sm outline-none transition-colors duration-200"
+                >
+                  {CURRENCY_OPTIONS.map((value) => (
+                    <option key={value} value={value}>
+                      {value}
+                    </option>
+                  ))}
+                </select>
+              </div>
             </label>
           </div>
 

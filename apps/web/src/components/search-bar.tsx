@@ -16,7 +16,7 @@ export function SearchBar() {
   const router = useRouter();
   const [district, setDistrict] = useState('');
   const [rooms, setRooms] = useState('');
-  const [currency, setCurrency] = useState('');
+  const [currency, setCurrency] = useState<string>('UZS');
   const [maxPrice, setMaxPrice] = useState('');
 
   function handleSubmit(event: FormEvent) {
@@ -24,8 +24,11 @@ export function SearchBar() {
     const params = new URLSearchParams();
     if (district) params.set('district', district);
     if (rooms) params.set('rooms', rooms);
-    if (currency) params.set('currency', currency);
-    if (maxPrice) params.set('maxPrice', maxPrice);
+    // Currency only matters as a constraint when a price ceiling is set.
+    if (maxPrice) {
+      params.set('maxPrice', maxPrice);
+      if (currency) params.set('currency', currency);
+    }
     const query = params.toString();
     router.push(query ? `/?${query}` : '/');
   }
