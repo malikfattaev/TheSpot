@@ -55,7 +55,7 @@ export function ListingCard({
           ) : null}
           <h3 className="mt-1 line-clamp-1 font-medium">{listing.title}</h3>
           <p className="text-muted-foreground mt-1 text-sm">{specs.join(' · ')}</p>
-          <p className="mt-3 text-lg font-semibold">
+          <p className="mt-3 pr-12 text-lg font-semibold">
             {formatPrice(listing.price, listing.currency, locale)}
             <span className="text-muted-foreground text-sm font-normal">
               {listing.rentPeriod === 'DAILY' ? t('perDay') : t('perMonth')}
@@ -68,7 +68,8 @@ export function ListingCard({
         listingId={listing.id}
         initialFavorited={favorited}
         refreshOnToggle={refreshFavoriteOnToggle}
-        className="absolute right-3 top-3 z-10"
+        variant="surface"
+        className="absolute bottom-4 right-4 z-10"
       />
     </div>
   );
