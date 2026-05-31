@@ -54,6 +54,7 @@
     "type": "Тип",
     "description": "Описание",
     "address": "Адрес",
+    "districtSuffix": "район",
     "owner": "Владелец",
     "types": {
       "APARTMENT": "Квартира",

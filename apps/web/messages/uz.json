@@ -54,6 +54,7 @@
     "type": "Turi",
     "description": "Tavsif",
     "address": "Manzil",
+    "districtSuffix": "tuman",
     "owner": "Egasi",
     "types": {
       "APARTMENT": "Kvartira",
