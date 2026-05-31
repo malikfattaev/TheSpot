@@ -151,7 +151,7 @@ export function ListingsFilter() {
                   inputMode="numeric"
                   min={0}
                   placeholder={t('price')}
-                  className="h-full min-w-0 flex-1 rounded-l-xl bg-transparent px-3 text-sm outline-none"
+                  className="no-spinner h-full min-w-0 flex-1 rounded-l-xl bg-transparent px-3 text-sm outline-none"
                 />
                 <select
                   value={currency}

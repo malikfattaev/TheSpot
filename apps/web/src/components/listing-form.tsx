@@ -300,7 +300,7 @@ export function ListingForm({ locale, mode, listingId, initial }: ListingFormPro
               inputMode="decimal"
               min={0}
               placeholder="45"
-              className={fieldClass}
+              className={cn(fieldClass, 'no-spinner')}
             />
           </label>
 
@@ -313,7 +313,7 @@ export function ListingForm({ locale, mode, listingId, initial }: ListingFormPro
               inputMode="numeric"
               min={0}
               placeholder="3"
-              className={fieldClass}
+              className={cn(fieldClass, 'no-spinner')}
             />
           </label>
         </div>
@@ -372,7 +372,7 @@ export function ListingForm({ locale, mode, listingId, initial }: ListingFormPro
             min={0}
             required
             placeholder="5000000"
-            className={fieldClass}
+            className={cn(fieldClass, 'no-spinner')}
           />
         </label>
 

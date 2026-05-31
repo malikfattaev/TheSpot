@@ -75,7 +75,7 @@ export function SearchBar() {
           min={0}
           placeholder={t('price')}
           aria-label={t('price')}
-          className={`${fieldClass} min-w-0 flex-1 rounded-l-full pr-1`}
+          className={`${fieldClass} no-spinner min-w-0 flex-1 rounded-l-full pr-1`}
         />
         <select
           value={currency}
