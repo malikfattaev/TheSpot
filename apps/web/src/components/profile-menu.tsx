@@ -1,14 +1,13 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
-import { ChevronDown, LayoutList, LogOut } from 'lucide-react';
+import { LayoutList, LogOut } from 'lucide-react';
 import { useLocale, useTranslations } from 'next-intl';
 import { canPublishListings } from '@thespot/db/roles';
 import { signOut } from '@/app/[locale]/login/actions';
 import { Link } from '@/i18n/navigation';
 import type { SessionUser } from '@/lib/session';
 import { buttonVariants } from './ui/button';
-import { cn } from '@/lib/utils';
 
 function getInitials(name: string): string {
   return name
@@ -63,18 +62,9 @@ export function ProfileMenu({ user }: { user: SessionUser | null }) {
         aria-expanded={open}
         aria-label={t('menu')}
         onClick={() => setOpen((value) => !value)}
-        className="border-foreground/15 bg-card/50 ease-smooth hover:bg-card/80 flex items-center gap-2 rounded-full border py-1 pl-1 pr-2 transition-colors duration-300"
+        className="bg-primary text-primary-foreground ease-smooth flex h-10 w-10 items-center justify-center rounded-full text-xs font-semibold transition-opacity duration-300 hover:opacity-90"
       >
-        <span className="bg-primary text-primary-foreground flex h-8 w-8 items-center justify-center rounded-full text-xs font-semibold">
-          {getInitials(user.fullName)}
-        </span>
-        <ChevronDown
-          className={cn(
-            'text-muted-foreground ease-smooth h-4 w-4 transition-transform duration-300',
-            open && 'rotate-180',
-          )}
-          aria-hidden
-        />
+        {getInitials(user.fullName)}
       </button>
 
       {open && (

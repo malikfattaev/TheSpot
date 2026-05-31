@@ -13,7 +13,7 @@ export async function SiteHeader() {
           The Spot
         </Link>
 
-        <div className="flex items-center gap-5 sm:gap-6">
+        <div className="flex items-center gap-2.5">
           <LocaleSwitcher />
           <ProfileMenu user={user} />
         </div>
