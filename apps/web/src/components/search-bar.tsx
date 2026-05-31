@@ -4,7 +4,12 @@ import { type FormEvent, useState } from 'react';
 import { Search } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { useRouter } from '@/i18n/navigation';
-import { CURRENCY_OPTIONS, DISTRICT_KEYS, ROOM_OPTIONS } from '@/lib/listing-options';
+import {
+  CURRENCY_OPTIONS,
+  DISTRICT_KEYS,
+  RENT_PERIOD_OPTIONS,
+  ROOM_OPTIONS,
+} from '@/lib/listing-options';
 import { Button } from './ui/button';
 
 const fieldClass =
@@ -13,9 +18,11 @@ const fieldClass =
 export function SearchBar() {
   const t = useTranslations('Search');
   const tDistricts = useTranslations('Districts');
+  const tPeriods = useTranslations('ListingForm.rentPeriods');
   const router = useRouter();
   const [district, setDistrict] = useState('');
   const [rooms, setRooms] = useState('');
+  const [rentPeriod, setRentPeriod] = useState('');
   const [currency, setCurrency] = useState<string>('UZS');
   const [maxPrice, setMaxPrice] = useState('');
 
@@ -24,6 +31,7 @@ export function SearchBar() {
     const params = new URLSearchParams();
     if (district) params.set('district', district);
     if (rooms) params.set('rooms', rooms);
+    if (rentPeriod) params.set('rentPeriod', rentPeriod);
     // Currency only matters as a constraint when a price ceiling is set.
     if (maxPrice) {
       params.set('maxPrice', maxPrice);
@@ -62,6 +70,20 @@ export function SearchBar() {
         {ROOM_OPTIONS.map((value) => (
           <option key={value} value={value}>
             {value}
+          </option>
+        ))}
+      </select>
+      <div className="bg-border hidden h-6 w-px sm:block" />
+      <select
+        value={rentPeriod}
+        onChange={(event) => setRentPeriod(event.target.value)}
+        aria-label={t('rentPeriod')}
+        className={`${fieldClass} rounded-full ${rentPeriod ? '' : 'text-muted-foreground'}`}
+      >
+        <option value="">{t('anyPeriod')}</option>
+        {RENT_PERIOD_OPTIONS.map((period) => (
+          <option key={period} value={period}>
+            {tPeriods(period)}
           </option>
         ))}
       </select>
