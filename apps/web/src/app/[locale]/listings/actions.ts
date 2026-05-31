@@ -6,6 +6,7 @@ import { z } from 'zod';
 import { canPublishListings } from '@thespot/db/roles';
 import { getCurrentUser } from '@/lib/session';
 import { DISTRICT_KEYS, MAX_ROOMS } from '@/lib/listing-options';
+import { deleteListingObjects } from '@/lib/storage';
 import { routing, type Locale } from '@/i18n/routing';
 
 export type ListingActionResult = { error?: string; id?: string };
@@ -146,7 +147,7 @@ export async function updateListing(
     const { prisma } = await import('@thespot/db');
     const existing = await prisma.listing.findUnique({
       where: { id },
-      select: { ownerId: true, publishedAt: true },
+      select: { ownerId: true, publishedAt: true, images: { select: { url: true } } },
     });
     if (!existing) {
       return { error: 'notFound' };
@@ -183,6 +184,11 @@ export async function updateListing(
         },
       }),
     ]);
+
+    // Purge photos the owner removed during the edit from the bucket.
+    const kept = new Set(data.imageUrls);
+    const orphaned = existing.images.map((image) => image.url).filter((url) => !kept.has(url));
+    await deleteListingObjects(orphaned);
   } catch {
     return { error: 'unknown' };
   }
@@ -207,12 +213,14 @@ export async function deleteListing(id: string, rawLocale: string): Promise<List
     const { prisma } = await import('@thespot/db');
     const existing = await prisma.listing.findUnique({
       where: { id },
-      select: { ownerId: true },
+      select: { ownerId: true, images: { select: { url: true } } },
     });
     if (!existing || existing.ownerId !== user.id) {
       return { error: 'forbidden' };
     }
+    // Cascade removes the ListingImage rows; clear their bucket objects too.
     await prisma.listing.delete({ where: { id } });
+    await deleteListingObjects(existing.images.map((image) => image.url));
   } catch {
     return { error: 'unknown' };
   }

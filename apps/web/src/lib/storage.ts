@@ -1,5 +1,10 @@
 import { randomUUID } from 'node:crypto';
-import { GetObjectCommand, PutObjectCommand, S3Client } from '@aws-sdk/client-s3';
+import {
+  DeleteObjectsCommand,
+  GetObjectCommand,
+  PutObjectCommand,
+  S3Client,
+} from '@aws-sdk/client-s3';
 import sharp from 'sharp';
 
 /**
@@ -161,5 +166,31 @@ export async function getListingObject(key: string): Promise<StoredObject | null
     };
   } catch {
     return null;
+  }
+}
+
+/**
+ * Delete stored objects by key. Used when a listing (or some of its photos) is
+ * removed, so the bucket doesn't accumulate orphans. Best-effort: a storage
+ * failure must not block the DB delete, so this never throws. Only keys under
+ * the listings prefix are touched.
+ */
+export async function deleteListingObjects(keys: string[]): Promise<void> {
+  const storage = getClient();
+  if (!storage) return;
+
+  const safeKeys = keys.filter((key) => key.startsWith(LISTINGS_PREFIX));
+  if (safeKeys.length === 0) return;
+
+  try {
+    // DeleteObjects caps at 1000 keys per call — listings never approach that.
+    await storage.client.send(
+      new DeleteObjectsCommand({
+        Bucket: storage.config.bucket,
+        Delete: { Objects: safeKeys.map((Key) => ({ Key })), Quiet: true },
+      }),
+    );
+  } catch {
+    // Swallow — orphaned objects are recoverable; a failed user action isn't.
   }
 }
