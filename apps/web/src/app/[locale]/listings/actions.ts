@@ -5,6 +5,7 @@ import { redirect } from 'next/navigation';
 import { z } from 'zod';
 import { canPublishListings } from '@thespot/db/roles';
 import { getCurrentUser } from '@/lib/session';
+import { DISTRICT_KEYS, MAX_ROOMS } from '@/lib/listing-options';
 import { routing, type Locale } from '@/i18n/routing';
 
 export type ListingActionResult = { error?: string; id?: string };
@@ -13,11 +14,11 @@ const listingSchema = z.object({
   title: z.string().trim().min(4).max(120),
   description: z.string().trim().min(10).max(4000),
   type: z.enum(['APARTMENT', 'ROOM', 'HOUSE', 'STUDIO', 'COMMERCIAL']),
-  rooms: z.coerce.number().int().min(0).max(50),
+  rooms: z.coerce.number().int().min(1).max(MAX_ROOMS),
   areaSqm: z.coerce.number().positive().max(100000).nullable().optional(),
   floor: z.coerce.number().int().min(0).max(300).nullable().optional(),
   city: z.string().trim().min(2).max(80),
-  district: z.string().trim().max(80).nullable().optional(),
+  district: z.enum(DISTRICT_KEYS).nullable().optional(),
   address: z.string().trim().max(200).nullable().optional(),
   price: z.coerce.number().positive().max(1_000_000_000_000),
   currency: z.enum(['UZS', 'USD']),

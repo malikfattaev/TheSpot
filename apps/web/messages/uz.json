@@ -11,8 +11,11 @@
   },
   "Search": {
     "district": "Tuman",
+    "anyDistrict": "Barcha tumanlar",
     "rooms": "Xonalar",
     "anyRooms": "Har qanday",
+    "currency": "Valyuta",
+    "anyCurrency": "Har qanday",
     "price": "Narx (gacha)",
     "submit": "Qidirish"
   },
@@ -37,7 +40,7 @@
     "rooms": "{count} xona",
     "areaUnit": "m²",
     "floor": "{floor}-qavat",
-    "districtSuffix": "tuman",
+    "districtSuffix": "tumani",
     "perMonth": "/oy"
   },
   "ListingStatus": {
@@ -55,7 +58,7 @@
     "type": "Turi",
     "description": "Tavsif",
     "address": "Manzil",
-    "districtSuffix": "tuman",
+    "districtSuffix": "tumani",
     "owner": "Egasi",
     "types": {
       "APARTMENT": "Kvartira",
@@ -80,7 +83,7 @@
     "floor": "Qavat",
     "city": "Shahar",
     "district": "Tuman",
-    "districtPlaceholder": "Mirobod",
+    "districtPlaceholder": "Tanlanmagan",
     "address": "Manzil",
     "addressPlaceholder": "ko‘cha, uy",
     "price": "Oylik narx",
@@ -139,6 +142,20 @@
     "OWNER": "Uy egasi",
     "REALTOR": "Ijaraga beruvchi",
     "ADMIN": "Administrator"
+  },
+  "Districts": {
+    "bektemir": "Bektemir",
+    "chilanzar": "Chilonzor",
+    "mirabad": "Mirobod",
+    "mirzoulugbek": "Mirzo Ulug‘bek",
+    "olmazor": "Olmazor",
+    "sergeli": "Sirg‘ali",
+    "shaykhantakhur": "Shayxontohur",
+    "uchtepa": "Uchtepa",
+    "yakkasaray": "Yakkasaroy",
+    "yangihayot": "Yangihayot",
+    "yashnabad": "Yashnobod",
+    "yunusabad": "Yunusobod"
   },
   "Profile": {
     "menu": "Profil",

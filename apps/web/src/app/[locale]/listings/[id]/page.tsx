@@ -42,6 +42,12 @@ export default async function ListingPage({ params }: ListingPageProps) {
 
   const t = await getTranslations('Listing');
   const tRoles = await getTranslations('Roles');
+  const tDistricts = await getTranslations('Districts');
+
+  const districtLabel =
+    listing.district && tDistricts.has(listing.district)
+      ? tDistricts(listing.district)
+      : listing.district;
 
   const specs = [
     { label: t('rooms'), value: String(listing.rooms) },
@@ -66,11 +72,11 @@ export default async function ListingPage({ params }: ListingPageProps) {
 
       <div className="mt-8 grid items-stretch gap-8 lg:grid-cols-[1fr_320px]">
         <div className="animate-fade-up min-w-0" style={{ animationDelay: '60ms' }}>
-          {listing.district || listing.address ? (
+          {districtLabel || listing.address ? (
             <p className="text-muted-foreground flex flex-wrap items-center gap-1.5 text-sm font-medium">
               <MapPin className="h-4 w-4 shrink-0" aria-hidden />
               {[
-                listing.district ? `${listing.district} ${t('districtSuffix')}` : null,
+                districtLabel ? `${districtLabel} ${t('districtSuffix')}` : null,
                 listing.address || null,
               ]
                 .filter(Boolean)

@@ -6,7 +6,13 @@ import { mediaSrc } from '@/lib/media';
 
 export function ListingCard({ listing }: { listing: ListingCardData }) {
   const t = useTranslations('ListingCard');
+  const tDistricts = useTranslations('Districts');
   const locale = useLocale();
+
+  const districtLabel =
+    listing.district && tDistricts.has(listing.district)
+      ? tDistricts(listing.district)
+      : listing.district;
 
   const specs = [
     t('rooms', { count: listing.rooms }),
@@ -31,9 +37,9 @@ export function ListingCard({ listing }: { listing: ListingCardData }) {
       </div>
 
       <div className="flex flex-1 flex-col p-4">
-        {listing.district ? (
+        {districtLabel ? (
           <p className="text-muted-foreground text-xs font-medium uppercase tracking-wide">
-            {listing.district} {t('districtSuffix')}
+            {districtLabel} {t('districtSuffix')}
           </p>
         ) : null}
         <h3 className="mt-1 line-clamp-1 font-medium">{listing.title}</h3>

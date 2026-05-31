@@ -6,10 +6,11 @@ import { useTranslations } from 'next-intl';
 import { useRouter } from '@/i18n/navigation';
 import { createListing, updateListing, type ListingInput } from '@/app/[locale]/listings/actions';
 import { mediaSrc } from '@/lib/media';
+import { CURRENCY_OPTIONS, DISTRICT_KEYS, ROOM_OPTIONS } from '@/lib/listing-options';
 import { cn } from '@/lib/utils';
 
 const PROPERTY_TYPES = ['APARTMENT', 'ROOM', 'HOUSE', 'STUDIO', 'COMMERCIAL'] as const;
-const CURRENCIES = ['UZS', 'USD'] as const;
+const CURRENCIES = CURRENCY_OPTIONS;
 const MAX_IMAGES = 12;
 
 const fieldClass =
@@ -61,6 +62,7 @@ type Photo =
 
 export function ListingForm({ locale, mode, listingId, initial }: ListingFormProps) {
   const t = useTranslations('ListingForm');
+  const tDistricts = useTranslations('Districts');
   const router = useRouter();
   const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -275,16 +277,18 @@ export function ListingForm({ locale, mode, listingId, initial }: ListingFormPro
 
           <label className="grid gap-1.5">
             <span className={labelClass}>{t('rooms')}</span>
-            <input
+            <select
               value={values.rooms}
               onChange={(event) => set('rooms', event.target.value)}
-              type="number"
-              inputMode="numeric"
-              min={0}
-              max={50}
               required
-              className={fieldClass}
-            />
+              className={cn(fieldClass, 'appearance-none')}
+            >
+              {ROOM_OPTIONS.map((value) => (
+                <option key={value} value={value}>
+                  {value}
+                </option>
+              ))}
+            </select>
           </label>
 
           <label className="grid gap-1.5">
@@ -330,12 +334,18 @@ export function ListingForm({ locale, mode, listingId, initial }: ListingFormPro
 
           <label className="grid gap-1.5">
             <span className={labelClass}>{t('district')}</span>
-            <input
+            <select
               value={values.district}
               onChange={(event) => set('district', event.target.value)}
-              placeholder={t('districtPlaceholder')}
-              className={fieldClass}
-            />
+              className={cn(fieldClass, 'appearance-none')}
+            >
+              <option value="">{t('districtPlaceholder')}</option>
+              {DISTRICT_KEYS.map((key) => (
+                <option key={key} value={key}>
+                  {tDistricts(key)}
+                </option>
+              ))}
+            </select>
           </label>
         </div>
 

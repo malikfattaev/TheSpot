@@ -5,9 +5,8 @@ import { ChevronDown, SlidersHorizontal } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { useSearchParams } from 'next/navigation';
 import { usePathname, useRouter } from '@/i18n/navigation';
+import { CURRENCY_OPTIONS, DISTRICT_KEYS, ROOM_OPTIONS } from '@/lib/listing-options';
 import { cn } from '@/lib/utils';
-
-const ROOM_OPTIONS = [1, 2, 3, 4] as const;
 
 const fieldClass =
   'h-11 w-full rounded-xl border border-border bg-background px-3 text-sm outline-none transition-colors duration-200 focus:border-foreground/30';
@@ -15,6 +14,7 @@ const fieldClass =
 export function ListingsFilter() {
   const t = useTranslations('Search');
   const tf = useTranslations('Filter');
+  const tDistricts = useTranslations('Districts');
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -24,8 +24,9 @@ export function ListingsFilter() {
   const [rooms, setRooms] = useState(searchParams.get('rooms') ?? '');
   const [district, setDistrict] = useState(searchParams.get('district') ?? '');
   const [maxPrice, setMaxPrice] = useState(searchParams.get('maxPrice') ?? '');
+  const [currency, setCurrency] = useState(searchParams.get('currency') ?? '');
 
-  const activeCount = ['rooms', 'district', 'maxPrice'].filter((key) =>
+  const activeCount = ['rooms', 'district', 'maxPrice', 'currency'].filter((key) =>
     searchParams.get(key),
   ).length;
 
@@ -52,7 +53,8 @@ export function ListingsFilter() {
   function apply() {
     const params = new URLSearchParams();
     if (rooms) params.set('rooms', rooms);
-    if (district.trim()) params.set('district', district.trim());
+    if (district) params.set('district', district);
+    if (currency) params.set('currency', currency);
     if (maxPrice) params.set('maxPrice', maxPrice);
     const query = params.toString();
     router.replace(query ? `${pathname}?${query}` : pathname);
@@ -63,6 +65,7 @@ export function ListingsFilter() {
     setRooms('');
     setDistrict('');
     setMaxPrice('');
+    setCurrency('');
     router.replace(pathname);
     setOpen(false);
   }
@@ -112,7 +115,7 @@ export function ListingsFilter() {
                 <option value="">{t('anyRooms')}</option>
                 {ROOM_OPTIONS.map((value) => (
                   <option key={value} value={value}>
-                    {value}+
+                    {value}
                   </option>
                 ))}
               </select>
@@ -120,13 +123,34 @@ export function ListingsFilter() {
 
             <label className="flex flex-col gap-1.5">
               <span className="text-muted-foreground text-xs font-medium">{t('district')}</span>
-              <input
+              <select
                 value={district}
                 onChange={(event) => setDistrict(event.target.value)}
-                onKeyDown={(event) => event.key === 'Enter' && apply()}
-                placeholder={t('district')}
-                className={fieldClass}
-              />
+                className={cn(fieldClass, 'appearance-none')}
+              >
+                <option value="">{t('anyDistrict')}</option>
+                {DISTRICT_KEYS.map((key) => (
+                  <option key={key} value={key}>
+                    {tDistricts(key)}
+                  </option>
+                ))}
+              </select>
+            </label>
+
+            <label className="flex flex-col gap-1.5">
+              <span className="text-muted-foreground text-xs font-medium">{t('currency')}</span>
+              <select
+                value={currency}
+                onChange={(event) => setCurrency(event.target.value)}
+                className={cn(fieldClass, 'appearance-none')}
+              >
+                <option value="">{t('anyCurrency')}</option>
+                {CURRENCY_OPTIONS.map((value) => (
+                  <option key={value} value={value}>
+                    {value}
+                  </option>
+                ))}
+              </select>
             </label>
 
             <label className="flex flex-col gap-1.5">

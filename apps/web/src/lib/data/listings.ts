@@ -39,12 +39,14 @@ export type ListingDetail = {
 };
 
 export type ListingFilters = {
-  /** Minimum number of rooms (e.g. `2` matches 2+ rooms). */
+  /** Exact number of rooms. */
   rooms?: number;
-  /** District name, matched case-insensitively as a substring. */
+  /** District key (see `lib/listing-options`), matched exactly. */
   district?: string;
-  /** Maximum price, inclusive. */
+  /** Maximum price, inclusive. Only meaningful together with `currency`. */
   maxPrice?: number;
+  /** Currency to filter by (prices across currencies aren't comparable). */
+  currency?: Currency;
 };
 
 const cardSelect = {
@@ -97,10 +99,9 @@ export async function getPublishedListings(
     const listings = await prisma.listing.findMany({
       where: {
         status: 'PUBLISHED',
-        ...(filters.rooms ? { rooms: { gte: filters.rooms } } : {}),
-        ...(filters.district
-          ? { district: { contains: filters.district, mode: 'insensitive' } }
-          : {}),
+        ...(filters.rooms ? { rooms: filters.rooms } : {}),
+        ...(filters.district ? { district: filters.district } : {}),
+        ...(filters.currency ? { currency: filters.currency } : {}),
         ...(filters.maxPrice ? { price: { lte: filters.maxPrice } } : {}),
       },
       orderBy: { publishedAt: 'desc' },

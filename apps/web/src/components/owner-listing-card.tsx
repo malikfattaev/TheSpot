@@ -20,7 +20,13 @@ export function OwnerListingCard({ listing }: { listing: OwnerListingData }) {
   const t = useTranslations('Profile');
   const tCard = useTranslations('ListingCard');
   const tStatus = useTranslations('ListingStatus');
+  const tDistricts = useTranslations('Districts');
   const locale = useLocale();
+
+  const districtLabel =
+    listing.district && tDistricts.has(listing.district)
+      ? tDistricts(listing.district)
+      : listing.district;
   const router = useRouter();
   const [confirming, setConfirming] = useState(false);
   const [pending, startTransition] = useTransition();
@@ -59,9 +65,9 @@ export function OwnerListingCard({ listing }: { listing: OwnerListingData }) {
           >
             {tStatus(listing.status)}
           </span>
-          {listing.district ? (
+          {districtLabel ? (
             <span className="text-muted-foreground truncate text-xs uppercase tracking-wide">
-              {listing.district} {tCard('districtSuffix')}
+              {districtLabel} {tCard('districtSuffix')}
             </span>
           ) : null}
         </div>

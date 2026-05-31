@@ -11,8 +11,11 @@
   },
   "Search": {
     "district": "Район",
+    "anyDistrict": "Все районы",
     "rooms": "Комнаты",
     "anyRooms": "Любые",
+    "currency": "Валюта",
+    "anyCurrency": "Любая",
     "price": "Цена до",
     "submit": "Найти"
   },
@@ -80,7 +83,7 @@
     "floor": "Этаж",
     "city": "Город",
     "district": "Район",
-    "districtPlaceholder": "Мирабадский",
+    "districtPlaceholder": "Не выбран",
     "address": "Адрес",
     "addressPlaceholder": "улица, дом",
     "price": "Цена в месяц",
@@ -139,6 +142,20 @@
     "OWNER": "Собственник",
     "REALTOR": "Арендодатель",
     "ADMIN": "Администратор"
+  },
+  "Districts": {
+    "bektemir": "Бектемирский",
+    "chilanzar": "Чиланзарский",
+    "mirabad": "Мирабадский",
+    "mirzoulugbek": "Мирзо-Улугбекский",
+    "olmazor": "Алмазарский",
+    "sergeli": "Сергелийский",
+    "shaykhantakhur": "Шайхантахурский",
+    "uchtepa": "Учтепинский",
+    "yakkasaray": "Яккасарайский",
+    "yangihayot": "Янгихаётский",
+    "yashnabad": "Яшнабадский",
+    "yunusabad": "Юнусабадский"
   },
   "Profile": {
     "menu": "Профиль",
