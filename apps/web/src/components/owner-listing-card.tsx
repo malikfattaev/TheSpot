@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useTransition } from 'react';
-import { Loader2, Pencil, Trash2 } from 'lucide-react';
+import { Loader2, Pencil, Rocket, Trash2 } from 'lucide-react';
 import { useLocale, useTranslations } from 'next-intl';
 import { Link, useRouter } from '@/i18n/navigation';
 import { deleteListing } from '@/app/[locale]/listings/actions';
@@ -99,6 +99,14 @@ export function OwnerListingCard({ listing }: { listing: OwnerListingData }) {
           </>
         ) : (
           <>
+            <button
+              type="button"
+              aria-label={t('promote')}
+              title={t('promote')}
+              className="border-border text-muted-foreground hover:border-foreground/30 hover:text-amber-500 flex h-10 w-10 items-center justify-center rounded-full border transition-colors"
+            >
+              <Rocket className="h-4 w-4" aria-hidden />
+            </button>
             <Link
               href={`/listings/${listing.id}/edit`}
               aria-label={t('edit')}
