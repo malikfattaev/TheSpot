@@ -64,7 +64,7 @@ export default async function ListingPage({ params }: ListingPageProps) {
         <ListingGallery images={listing.images} title={listing.title} />
       </div>
 
-      <div className="mt-8 grid gap-8 lg:grid-cols-[1fr_320px]">
+      <div className="mt-8 grid items-stretch gap-8 lg:grid-cols-[1fr_320px]">
         <div className="animate-fade-up min-w-0" style={{ animationDelay: '60ms' }}>
           {listing.district ? (
             <p className="text-muted-foreground text-sm font-medium uppercase tracking-wide">
@@ -85,28 +85,10 @@ export default async function ListingPage({ params }: ListingPageProps) {
               </div>
             ))}
           </div>
-
-          <div className="mt-8">
-            <h2 className="text-muted-foreground text-xs font-medium uppercase tracking-wide">
-              {t('description')}
-            </h2>
-            <p className="mt-2 whitespace-pre-line leading-relaxed">{listing.description}</p>
-          </div>
-
-          {listing.address ? (
-            <div className="mt-6">
-              <h2 className="text-muted-foreground text-xs font-medium uppercase tracking-wide">
-                {t('address')}
-              </h2>
-              <p className="mt-2">
-                {[listing.city, listing.address].filter(Boolean).join(', ')}
-              </p>
-            </div>
-          ) : null}
         </div>
 
-        <aside className="animate-fade-up lg:sticky lg:top-6 lg:self-start" style={{ animationDelay: '120ms' }}>
-          <div className="surface rounded-3xl p-6">
+        <aside className="animate-fade-up" style={{ animationDelay: '120ms' }}>
+          <div className="surface flex h-full flex-col rounded-3xl p-6">
             <p className="text-muted-foreground text-xs font-medium uppercase tracking-wide">
               {t('owner')}
             </p>
@@ -123,7 +105,7 @@ export default async function ListingPage({ params }: ListingPageProps) {
             {listing.owner.phone ? (
               <a
                 href={`tel:${listing.owner.phone}`}
-                className="bg-primary text-primary-foreground ease-smooth mt-5 flex h-12 w-full items-center justify-center gap-2 rounded-full text-sm font-medium transition-all duration-300 hover:opacity-90"
+                className="bg-primary text-primary-foreground ease-smooth mt-auto flex h-12 w-full items-center justify-center gap-2 rounded-full text-sm font-medium transition-all duration-300 hover:opacity-90"
               >
                 <Phone className="h-4 w-4" aria-hidden />
                 {listing.owner.phone}
@@ -131,6 +113,22 @@ export default async function ListingPage({ params }: ListingPageProps) {
             ) : null}
           </div>
         </aside>
+      </div>
+
+      <div className="mt-8 max-w-3xl">
+        <h2 className="text-muted-foreground text-xs font-medium uppercase tracking-wide">
+          {t('description')}
+        </h2>
+        <p className="mt-2 whitespace-pre-line leading-relaxed">{listing.description}</p>
+
+        {listing.address ? (
+          <div className="mt-6">
+            <h2 className="text-muted-foreground text-xs font-medium uppercase tracking-wide">
+              {t('address')}
+            </h2>
+            <p className="mt-2">{[listing.city, listing.address].filter(Boolean).join(', ')}</p>
+          </div>
+        ) : null}
       </div>
     </section>
   );
