@@ -63,6 +63,7 @@
     "address": "Адрес",
     "districtSuffix": "район",
     "owner": "Владелец",
+    "writeTelegram": "Написать в Telegram",
     "types": {
       "APARTMENT": "Квартира",
       "ROOM": "Комната",
@@ -178,7 +179,8 @@
     "cancel": "Отмена",
     "logout": "Выйти",
     "login": "Войти",
-    "favorites": "Избранное"
+    "favorites": "Избранное",
+    "editProfile": "Изменить профиль"
   },
   "Login": {
     "title": "Вход",
@@ -265,5 +267,25 @@
     "empty": "Вы пока ничего не добавили в избранное.",
     "add": "В избранное",
     "remove": "Убрать из избранного"
+  },
+  "EditProfile": {
+    "title": "Профиль",
+    "subtitle": "Измените имя и контакт в Telegram. Номер телефона менять нельзя.",
+    "back": "На главную",
+    "name": "Имя",
+    "phone": "Номер телефона",
+    "phoneLocked": "Номер привязан к аккаунту и не меняется.",
+    "telegram": "Telegram",
+    "telegramHint": "Никнейм в Telegram — по нему с вами свяжутся из объявления.",
+    "save": "Сохранить",
+    "saving": "Сохраняем...",
+    "saved": "Профиль обновлён.",
+    "errors": {
+      "invalidFields": "Проверьте заполнение полей.",
+      "invalidTelegram": "Некорректный никнейм Telegram.",
+      "unauthorized": "Войдите в аккаунт.",
+      "databaseUnavailable": "База данных временно недоступна.",
+      "unknown": "Что-то пошло не так."
+    }
   }
 }

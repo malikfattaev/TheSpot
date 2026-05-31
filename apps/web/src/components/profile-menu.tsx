@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
-import { Heart, Info, LayoutList, LogOut, Phone, Plus } from 'lucide-react';
+import { Heart, Info, LayoutList, LogOut, Phone, Plus, Settings } from 'lucide-react';
 import { useLocale, useTranslations } from 'next-intl';
 import { canPublishListings } from '@thespot/db/roles';
 import { signOut } from '@/app/[locale]/login/actions';
@@ -84,6 +84,10 @@ export function ProfileMenu({ user }: { user: SessionUser | null }) {
           </div>
 
           <div className="bg-border my-1 h-px" />
+          <Link href="/profile" role="menuitem" onClick={close} className={itemClass}>
+            <Settings className="text-muted-foreground h-4 w-4" aria-hidden />
+            {t('editProfile')}
+          </Link>
           <Link href="/favorites" role="menuitem" onClick={close} className={itemClass}>
             <Heart className="text-muted-foreground h-4 w-4" aria-hidden />
             {t('favorites')}

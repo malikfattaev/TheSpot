@@ -63,6 +63,7 @@
     "address": "Manzil",
     "districtSuffix": "tumani",
     "owner": "Egasi",
+    "writeTelegram": "Telegramda yozish",
     "types": {
       "APARTMENT": "Kvartira",
       "ROOM": "Xona",
@@ -178,7 +179,8 @@
     "cancel": "Bekor qilish",
     "logout": "Chiqish",
     "login": "Kirish",
-    "favorites": "Saqlanganlar"
+    "favorites": "Saqlanganlar",
+    "editProfile": "Profilni tahrirlash"
   },
   "Login": {
     "title": "Kirish",
@@ -265,5 +267,25 @@
     "empty": "Siz hali hech narsa saqlamadingiz.",
     "add": "Saqlash",
     "remove": "Saqlanganlardan olib tashlash"
+  },
+  "EditProfile": {
+    "title": "Profil",
+    "subtitle": "Ism va Telegram kontaktini o‘zgartiring. Telefon raqamini o‘zgartirib bo‘lmaydi.",
+    "back": "Bosh sahifaga",
+    "name": "Ism",
+    "phone": "Telefon raqami",
+    "phoneLocked": "Raqam akkauntga bog‘langan va o‘zgartirilmaydi.",
+    "telegram": "Telegram",
+    "telegramHint": "Telegram nikneymi — e’lon orqali siz bilan shu orqali bog‘lanishadi.",
+    "save": "Saqlash",
+    "saving": "Saqlanmoqda...",
+    "saved": "Profil yangilandi.",
+    "errors": {
+      "invalidFields": "Maydonlarni to‘g‘ri to‘ldiring.",
+      "invalidTelegram": "Telegram nikneymi noto‘g‘ri.",
+      "unauthorized": "Akkauntga kiring.",
+      "databaseUnavailable": "Ma’lumotlar bazasi vaqtincha mavjud emas.",
+      "unknown": "Nimadir xato ketdi."
+    }
   }
 }

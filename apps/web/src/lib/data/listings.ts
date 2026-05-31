@@ -36,7 +36,13 @@ export type ListingDetail = {
   district: string | null;
   address: string | null;
   images: { id: string; url: string; alt: string | null }[];
-  owner: { id: string; fullName: string; phone: string | null; role: string };
+  owner: {
+    id: string;
+    fullName: string;
+    phone: string | null;
+    telegramUsername: string | null;
+    role: string;
+  };
   createdAt: Date;
 };
 
@@ -154,7 +160,9 @@ export async function getListingById(id: string): Promise<ListingDetail | null> 
       where: { id },
       include: {
         images: { orderBy: { position: 'asc' }, select: { id: true, url: true, alt: true } },
-        owner: { select: { id: true, fullName: true, phone: true, role: true } },
+        owner: {
+          select: { id: true, fullName: true, phone: true, telegramUsername: true, role: true },
+        },
       },
     });
 

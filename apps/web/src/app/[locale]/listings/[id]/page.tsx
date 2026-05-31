@@ -1,13 +1,14 @@
 import type { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
 import { notFound } from 'next/navigation';
-import { ArrowLeft, MapPin, Phone } from 'lucide-react';
+import { ArrowLeft, MapPin, Phone, Send } from 'lucide-react';
 import { Link } from '@/i18n/navigation';
 import { ListingGallery } from '@/components/listing-gallery';
 import { FavoriteButton } from '@/components/favorite-button';
 import { getFavoriteListingIds, getListingById } from '@/lib/data/listings';
 import { getCurrentUser } from '@/lib/session';
 import { formatPrice } from '@/lib/format';
+import { telegramUrl } from '@/lib/telegram';
 
 export const dynamic = 'force-dynamic';
 
@@ -129,14 +130,30 @@ export default async function ListingPage({ params }: ListingPageProps) {
               </div>
             </div>
 
-            {listing.owner.phone ? (
-              <a
-                href={`tel:${listing.owner.phone}`}
-                className="bg-primary text-primary-foreground ease-smooth mt-6 flex h-12 w-full items-center justify-center gap-2 rounded-full text-sm font-medium transition-all duration-300 hover:opacity-90 lg:mt-auto"
-              >
-                <Phone className="h-4 w-4" aria-hidden />
-                {listing.owner.phone}
-              </a>
+            {listing.owner.phone || listing.owner.telegramUsername ? (
+              <div className="mt-6 flex flex-col gap-2 lg:mt-auto">
+                {listing.owner.phone ? (
+                  <a
+                    href={`tel:${listing.owner.phone}`}
+                    className="bg-primary text-primary-foreground ease-smooth flex h-12 w-full items-center justify-center gap-2 rounded-full text-sm font-medium transition-all duration-300 hover:opacity-90"
+                  >
+                    <Phone className="h-4 w-4" aria-hidden />
+                    {listing.owner.phone}
+                  </a>
+                ) : null}
+                {listing.owner.telegramUsername ? (
+                  <a
+                    href={telegramUrl(listing.owner.telegramUsername)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={t('writeTelegram')}
+                    title={t('writeTelegram')}
+                    className="border-foreground/20 text-foreground ease-smooth hover:bg-foreground/5 flex h-12 w-full items-center justify-center gap-2 rounded-full border text-sm font-medium transition-all duration-300"
+                  >
+                    <Send className="h-4 w-4" aria-hidden />@{listing.owner.telegramUsername}
+                  </a>
+                ) : null}
+              </div>
             ) : null}
           </div>
         </aside>
