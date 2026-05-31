@@ -14,9 +14,10 @@ const MAX_FILES = 12;
 
 /**
  * Receives listing photos as multipart form data and stores them in the
- * bucket, returning their public URLs. Only publishers may upload. Using a
- * route handler (not a server action) avoids the small server-action body
- * limit on multi-photo uploads.
+ * (private) bucket, returning their object keys — images are served back
+ * through `/api/media/[...key]`, never via direct bucket URLs. Only publishers
+ * may upload. Using a route handler (not a server action) avoids the small
+ * server-action body limit on multi-photo uploads.
  */
 export async function POST(request: Request): Promise<Response> {
   const user = await getCurrentUser();

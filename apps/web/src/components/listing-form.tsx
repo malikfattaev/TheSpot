@@ -102,10 +102,14 @@ export function ListingForm({ locale, mode, listingId, initial }: ListingFormPro
 
   function addFiles(fileList: FileList | null) {
     if (!fileList) return;
-    const incoming = Array.from(fileList).map(
-      (file): Photo => ({ kind: 'new', file, preview: URL.createObjectURL(file) }),
-    );
-    setPhotos((prev) => [...prev, ...incoming].slice(0, MAX_IMAGES));
+    // Only create object URLs for the files that actually fit — creating them
+    // for the overflow and then slicing it off would leak those blob URLs.
+    const remaining = MAX_IMAGES - photos.length;
+    if (remaining <= 0) return;
+    const incoming = Array.from(fileList)
+      .slice(0, remaining)
+      .map((file): Photo => ({ kind: 'new', file, preview: URL.createObjectURL(file) }));
+    setPhotos((prev) => [...prev, ...incoming]);
   }
 
   function removePhoto(index: number) {

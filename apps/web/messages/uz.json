@@ -119,7 +119,7 @@
       "storageUnavailable": "Rasm ombori mavjud emas.",
       "uploadFailed": "Rasmni yuklab bo‘lmadi.",
       "invalidType": "Rasm formati qo‘llab-quvvatlanmaydi.",
-      "tooLarge": "Rasm juda katta (maks. 8 MB).",
+      "tooLarge": "Rasm juda katta (maks. 15 MB).",
       "tooManyFiles": "Rasm juda ko‘p.",
       "noFiles": "Rasm tanlang.",
       "unknown": "Nimadir xato ketdi."
