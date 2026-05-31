@@ -170,16 +170,27 @@ export async function getListingObject(key: string): Promise<StoredObject | null
 }
 
 /**
- * Delete stored objects by key. Used when a listing (or some of its photos) is
- * removed, so the bucket doesn't accumulate orphans. Best-effort: a storage
- * failure must not block the DB delete, so this never throws. Only keys under
- * the listings prefix are touched.
+ * Normalize a stored image reference to its bucket object key. New listings
+ * store bare keys (`listings/<uuid>.webp`); some early ones stored a full
+ * bucket URL — in both cases the key starts at the `listings/` segment.
  */
-export async function deleteListingObjects(keys: string[]): Promise<void> {
+function toObjectKey(value: string): string | null {
+  const index = value.indexOf(LISTINGS_PREFIX);
+  return index >= 0 ? value.slice(index) : null;
+}
+
+/**
+ * Delete stored objects by key or legacy URL. Used when a listing (or some of
+ * its photos) is removed, so the bucket doesn't accumulate orphans. Best-effort:
+ * a storage failure must not block the DB delete, so this never throws.
+ */
+export async function deleteListingObjects(refs: string[]): Promise<void> {
   const storage = getClient();
   if (!storage) return;
 
-  const safeKeys = keys.filter((key) => key.startsWith(LISTINGS_PREFIX));
+  const safeKeys = refs
+    .map(toObjectKey)
+    .filter((key): key is string => key !== null);
   if (safeKeys.length === 0) return;
 
   try {
