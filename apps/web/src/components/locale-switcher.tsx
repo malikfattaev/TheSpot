@@ -1,11 +1,9 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
-import { ChevronDown } from 'lucide-react';
 import { useLocale, useTranslations } from 'next-intl';
 import { usePathname, useRouter } from '@/i18n/navigation';
 import { routing, type Locale } from '@/i18n/routing';
-import { cn } from '@/lib/utils';
 
 const shortLabels: Record<Locale, string> = {
   ru: 'RU',
@@ -57,16 +55,9 @@ export function LocaleSwitcher() {
         aria-expanded={open}
         aria-label={t('label')}
         onClick={() => setOpen((value) => !value)}
-        className="text-foreground ease-smooth hover:bg-foreground/5 flex items-center gap-1 rounded-full px-2 py-1 text-sm font-semibold transition-colors duration-300"
+        className="text-foreground ease-smooth hover:bg-foreground/5 flex items-center justify-center rounded-full px-2.5 py-1 text-sm font-semibold transition-colors duration-300"
       >
         {shortLabels[locale]}
-        <ChevronDown
-          className={cn(
-            'text-muted-foreground ease-smooth h-4 w-4 transition-transform duration-300',
-            open && 'rotate-180',
-          )}
-          aria-hidden
-        />
       </button>
 
       {open && (
