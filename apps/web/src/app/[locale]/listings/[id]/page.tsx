@@ -66,12 +66,12 @@ export default async function ListingPage({ params }: ListingPageProps) {
 
       <div className="mt-8 grid items-stretch gap-8 lg:grid-cols-[1fr_320px]">
         <div className="animate-fade-up min-w-0" style={{ animationDelay: '60ms' }}>
-          {listing.district || listing.address || listing.city ? (
+          {listing.district || listing.address ? (
             <p className="text-muted-foreground flex flex-wrap items-center gap-1.5 text-sm font-medium">
               <MapPin className="h-4 w-4 shrink-0" aria-hidden />
               {[
                 listing.district ? `${listing.district} ${t('districtSuffix')}` : null,
-                [listing.city, listing.address].filter(Boolean).join(', ') || null,
+                listing.address || null,
               ]
                 .filter(Boolean)
                 .join(' - ')}
