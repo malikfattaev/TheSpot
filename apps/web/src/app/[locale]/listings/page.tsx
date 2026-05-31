@@ -16,7 +16,7 @@ export default async function ListingsPage({ params, searchParams }: ListingsPag
   const sp = await searchParams;
 
   const query = new URLSearchParams();
-  for (const key of ['rooms', 'district', 'maxPrice', 'currency']) {
+  for (const key of ['rooms', 'district', 'maxPrice', 'currency', 'rentPeriod']) {
     const value = sp[key];
     const single = Array.isArray(value) ? value[0] : value;
     if (single) query.set(key, single);

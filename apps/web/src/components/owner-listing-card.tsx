@@ -78,7 +78,9 @@ export function OwnerListingCard({ listing }: { listing: OwnerListingData }) {
         </p>
         <p className="mt-1 font-semibold">
           {formatPrice(listing.price, listing.currency, locale)}
-          <span className="text-muted-foreground text-sm font-normal">{tCard('perMonth')}</span>
+          <span className="text-muted-foreground text-sm font-normal">
+            {listing.rentPeriod === 'DAILY' ? tCard('perDay') : tCard('perMonth')}
+          </span>
         </p>
       </div>
 

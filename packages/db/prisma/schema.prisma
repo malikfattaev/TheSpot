@@ -38,6 +38,11 @@ enum Currency {
   USD
 }
 
+enum RentPeriod {
+  MONTHLY // rent priced per month
+  DAILY // rent priced per day (посуточно)
+}
+
 model User {
   id           String    @id @default(cuid())
   email        String    @unique
@@ -61,6 +66,7 @@ model Listing {
   status       ListingStatus  @default(DRAFT)
   price        Decimal        @db.Decimal(12, 2)
   currency     Currency       @default(UZS)
+  rentPeriod   RentPeriod     @default(MONTHLY)
   rooms        Int
   areaSqm      Float?
   floor        Int?

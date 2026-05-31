@@ -30,6 +30,13 @@ export type DistrictKey = (typeof DISTRICT_KEYS)[number];
 export const CURRENCY_OPTIONS = ['UZS', 'USD'] as const;
 export type CurrencyOption = (typeof CURRENCY_OPTIONS)[number];
 
+export const RENT_PERIOD_OPTIONS = ['MONTHLY', 'DAILY'] as const;
+export type RentPeriodOption = (typeof RENT_PERIOD_OPTIONS)[number];
+
+export function isRentPeriod(value: string | null | undefined): value is RentPeriodOption {
+  return value === 'MONTHLY' || value === 'DAILY';
+}
+
 export function isDistrictKey(value: string | null | undefined): value is DistrictKey {
   return !!value && (DISTRICT_KEYS as readonly string[]).includes(value);
 }

@@ -6,7 +6,12 @@ import { useTranslations } from 'next-intl';
 import { useRouter } from '@/i18n/navigation';
 import { createListing, updateListing, type ListingInput } from '@/app/[locale]/listings/actions';
 import { mediaSrc } from '@/lib/media';
-import { CURRENCY_OPTIONS, DISTRICT_KEYS, ROOM_OPTIONS } from '@/lib/listing-options';
+import {
+  CURRENCY_OPTIONS,
+  DISTRICT_KEYS,
+  RENT_PERIOD_OPTIONS,
+  ROOM_OPTIONS,
+} from '@/lib/listing-options';
 import { cn } from '@/lib/utils';
 
 const PROPERTY_TYPES = ['APARTMENT', 'ROOM', 'HOUSE', 'STUDIO', 'COMMERCIAL'] as const;
@@ -29,6 +34,7 @@ export type ListingFormInitial = {
   address: string;
   price: string;
   currency: (typeof CURRENCIES)[number];
+  rentPeriod: (typeof RENT_PERIOD_OPTIONS)[number];
   publish: boolean;
   imageUrls: string[];
 };
@@ -45,6 +51,7 @@ const EMPTY_INITIAL: ListingFormInitial = {
   address: '',
   price: '',
   currency: 'UZS',
+  rentPeriod: 'MONTHLY',
   publish: true,
   imageUrls: [],
 };
@@ -79,6 +86,7 @@ export function ListingForm({ locale, mode, listingId, initial }: ListingFormPro
     address: start.address,
     price: start.price,
     currency: start.currency,
+    rentPeriod: start.rentPeriod,
     publish: start.publish,
   });
   const [photos, setPhotos] = useState<Photo[]>(
@@ -361,7 +369,7 @@ export function ListingForm({ locale, mode, listingId, initial }: ListingFormPro
       </div>
 
       {/* Price */}
-      <div className="surface grid gap-5 rounded-3xl p-6 sm:grid-cols-[1fr_auto]">
+      <div className="surface grid gap-5 rounded-3xl p-6 sm:grid-cols-[1fr_auto_auto]">
         <label className="grid gap-1.5">
           <span className={labelClass}>{t('price')}</span>
           <input
@@ -381,11 +389,26 @@ export function ListingForm({ locale, mode, listingId, initial }: ListingFormPro
           <select
             value={values.currency}
             onChange={(event) => set('currency', event.target.value as typeof values.currency)}
-            className={cn(fieldClass, 'appearance-none sm:w-32')}
+            className={cn(fieldClass, 'appearance-none sm:w-28')}
           >
             {CURRENCIES.map((currency) => (
               <option key={currency} value={currency}>
                 {currency}
+              </option>
+            ))}
+          </select>
+        </label>
+
+        <label className="grid gap-1.5">
+          <span className={labelClass}>{t('rentPeriod')}</span>
+          <select
+            value={values.rentPeriod}
+            onChange={(event) => set('rentPeriod', event.target.value as typeof values.rentPeriod)}
+            className={cn(fieldClass, 'appearance-none sm:w-40')}
+          >
+            {RENT_PERIOD_OPTIONS.map((period) => (
+              <option key={period} value={period}>
+                {t(`rentPeriods.${period}`)}
               </option>
             ))}
           </select>

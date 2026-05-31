@@ -22,6 +22,7 @@ const listingSchema = z.object({
   address: z.string().trim().max(200).nullable().optional(),
   price: z.coerce.number().positive().max(1_000_000_000_000),
   currency: z.enum(['UZS', 'USD']),
+  rentPeriod: z.enum(['MONTHLY', 'DAILY']).default('MONTHLY'),
   publish: z.boolean().default(true),
   // Object keys (e.g. `listings/<uuid>.jpg`), not URLs — see `lib/storage`.
   imageUrls: z.array(z.string().min(1).max(300)).max(12).default([]),
@@ -44,6 +45,7 @@ export type ListingInput = {
   address: string | null;
   price: string;
   currency: 'UZS' | 'USD';
+  rentPeriod: 'MONTHLY' | 'DAILY';
   publish: boolean;
   imageUrls: string[];
 };
@@ -97,6 +99,7 @@ export async function createListing(
         publishedAt: data.publish ? new Date() : null,
         price: data.price,
         currency: data.currency,
+        rentPeriod: data.rentPeriod,
         rooms: data.rooms,
         areaSqm: data.areaSqm ?? null,
         floor: data.floor ?? null,
@@ -167,6 +170,7 @@ export async function updateListing(
           publishedAt: data.publish ? (existing.publishedAt ?? new Date()) : null,
           price: data.price,
           currency: data.currency,
+          rentPeriod: data.rentPeriod,
           rooms: data.rooms,
           areaSqm: data.areaSqm ?? null,
           floor: data.floor ?? null,

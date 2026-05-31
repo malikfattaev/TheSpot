@@ -15,6 +15,8 @@
     "rooms": "Комнаты",
     "anyRooms": "Все",
     "currency": "Валюта",
+    "rentPeriod": "Период",
+    "anyPeriod": "Любой",
     "price": "Цена до",
     "submit": "Найти"
   },
@@ -40,7 +42,8 @@
     "areaUnit": "м²",
     "floor": "{floor} этаж",
     "districtSuffix": "район",
-    "perMonth": "/мес"
+    "perMonth": "/мес",
+    "perDay": "/сутки"
   },
   "ListingStatus": {
     "PUBLISHED": "Опубликовано",
@@ -50,6 +53,7 @@
   "Listing": {
     "back": "Все объявления",
     "perMonth": "/мес",
+    "perDay": "/сутки",
     "rooms": "Комнат",
     "area": "Площадь",
     "areaUnit": "м²",
@@ -85,8 +89,13 @@
     "districtPlaceholder": "Не выбран",
     "address": "Адрес",
     "addressPlaceholder": "улица, дом",
-    "price": "Цена в месяц",
+    "price": "Цена",
     "currency": "Валюта",
+    "rentPeriod": "Период аренды",
+    "rentPeriods": {
+      "MONTHLY": "Помесячно",
+      "DAILY": "Посуточно"
+    },
     "publishNow": "Опубликовать сразу",
     "publishHint": "Объявление сразу появится в общем списке. Снимите галочку, чтобы сохранить черновик.",
     "publish": "Опубликовать",

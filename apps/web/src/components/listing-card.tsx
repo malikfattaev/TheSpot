@@ -46,7 +46,9 @@ export function ListingCard({ listing }: { listing: ListingCardData }) {
         <p className="text-muted-foreground mt-1 text-sm">{specs.join(' · ')}</p>
         <p className="mt-3 text-lg font-semibold">
           {formatPrice(listing.price, listing.currency, locale)}
-          <span className="text-muted-foreground text-sm font-normal">{t('perMonth')}</span>
+          <span className="text-muted-foreground text-sm font-normal">
+            {listing.rentPeriod === 'DAILY' ? t('perDay') : t('perMonth')}
+          </span>
         </p>
       </div>
     </Link>

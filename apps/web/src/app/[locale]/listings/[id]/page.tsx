@@ -86,7 +86,9 @@ export default async function ListingPage({ params }: ListingPageProps) {
           <h1 className="mt-1 text-3xl font-semibold tracking-tight sm:text-4xl">{listing.title}</h1>
           <p className="mt-3 text-2xl font-semibold">
             {formatPrice(listing.price, listing.currency, locale)}
-            <span className="text-muted-foreground text-base font-normal">{t('perMonth')}</span>
+            <span className="text-muted-foreground text-base font-normal">
+              {listing.rentPeriod === 'DAILY' ? t('perDay') : t('perMonth')}
+            </span>
           </p>
 
           <div className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-4">

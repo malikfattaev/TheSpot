@@ -5,7 +5,12 @@ import { ChevronDown, SlidersHorizontal } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { useSearchParams } from 'next/navigation';
 import { usePathname, useRouter } from '@/i18n/navigation';
-import { CURRENCY_OPTIONS, DISTRICT_KEYS, ROOM_OPTIONS } from '@/lib/listing-options';
+import {
+  CURRENCY_OPTIONS,
+  DISTRICT_KEYS,
+  RENT_PERIOD_OPTIONS,
+  ROOM_OPTIONS,
+} from '@/lib/listing-options';
 import { cn } from '@/lib/utils';
 
 const fieldClass =
@@ -15,6 +20,7 @@ export function ListingsFilter() {
   const t = useTranslations('Search');
   const tf = useTranslations('Filter');
   const tDistricts = useTranslations('Districts');
+  const tPeriods = useTranslations('ListingForm.rentPeriods');
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -25,8 +31,9 @@ export function ListingsFilter() {
   const [district, setDistrict] = useState(searchParams.get('district') ?? '');
   const [maxPrice, setMaxPrice] = useState(searchParams.get('maxPrice') ?? '');
   const [currency, setCurrency] = useState(searchParams.get('currency') ?? 'UZS');
+  const [rentPeriod, setRentPeriod] = useState(searchParams.get('rentPeriod') ?? '');
 
-  const activeCount = ['rooms', 'district', 'maxPrice', 'currency'].filter((key) =>
+  const activeCount = ['rooms', 'district', 'maxPrice', 'rentPeriod'].filter((key) =>
     searchParams.get(key),
   ).length;
 
@@ -54,6 +61,7 @@ export function ListingsFilter() {
     const params = new URLSearchParams();
     if (rooms) params.set('rooms', rooms);
     if (district) params.set('district', district);
+    if (rentPeriod) params.set('rentPeriod', rentPeriod);
     // Currency only matters as a constraint when a price ceiling is set.
     if (maxPrice) {
       params.set('maxPrice', maxPrice);
@@ -69,6 +77,7 @@ export function ListingsFilter() {
     setDistrict('');
     setMaxPrice('');
     setCurrency('UZS');
+    setRentPeriod('');
     router.replace(pathname);
     setOpen(false);
   }
@@ -135,6 +144,22 @@ export function ListingsFilter() {
                 {DISTRICT_KEYS.map((key) => (
                   <option key={key} value={key}>
                     {tDistricts(key)}
+                  </option>
+                ))}
+              </select>
+            </label>
+
+            <label className="flex flex-col gap-1.5">
+              <span className="text-muted-foreground text-xs font-medium">{t('rentPeriod')}</span>
+              <select
+                value={rentPeriod}
+                onChange={(event) => setRentPeriod(event.target.value)}
+                className={cn(fieldClass, 'appearance-none')}
+              >
+                <option value="">{t('anyPeriod')}</option>
+                {RENT_PERIOD_OPTIONS.map((period) => (
+                  <option key={period} value={period}>
+                    {tPeriods(period)}
                   </option>
                 ))}
               </select>

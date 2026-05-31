@@ -53,6 +53,7 @@ export default async function EditListingPage({ params }: EditListingPageProps) 
     address: listing.address ?? '',
     price: String(listing.price),
     currency: listing.currency,
+    rentPeriod: listing.rentPeriod,
     publish: listing.status === 'PUBLISHED',
     imageUrls: listing.images.map((image) => image.url),
   };

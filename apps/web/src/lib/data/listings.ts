@@ -1,10 +1,11 @@
-import type { Currency, ListingStatus, Prisma, PropertyType } from '@thespot/db';
+import type { Currency, ListingStatus, Prisma, PropertyType, RentPeriod } from '@thespot/db';
 
 export type ListingCardData = {
   id: string;
   title: string;
   price: number;
   currency: Currency;
+  rentPeriod: RentPeriod;
   rooms: number;
   areaSqm: number | null;
   floor: number | null;
@@ -27,6 +28,7 @@ export type ListingDetail = {
   status: ListingStatus;
   price: number;
   currency: Currency;
+  rentPeriod: RentPeriod;
   rooms: number;
   areaSqm: number | null;
   floor: number | null;
@@ -47,6 +49,8 @@ export type ListingFilters = {
   maxPrice?: number;
   /** Currency to filter by (prices across currencies aren't comparable). */
   currency?: Currency;
+  /** Rent period: monthly or daily. */
+  rentPeriod?: RentPeriod;
 };
 
 const cardSelect = {
@@ -54,6 +58,7 @@ const cardSelect = {
   title: true,
   price: true,
   currency: true,
+  rentPeriod: true,
   rooms: true,
   areaSqm: true,
   floor: true,
@@ -70,6 +75,7 @@ function toCard(listing: CardRow): ListingCardData {
     title: listing.title,
     price: Number(listing.price),
     currency: listing.currency,
+    rentPeriod: listing.rentPeriod,
     rooms: listing.rooms,
     areaSqm: listing.areaSqm,
     floor: listing.floor,
@@ -101,6 +107,7 @@ export async function getPublishedListings(
         status: 'PUBLISHED',
         ...(filters.rooms ? { rooms: filters.rooms } : {}),
         ...(filters.district ? { district: filters.district } : {}),
+        ...(filters.rentPeriod ? { rentPeriod: filters.rentPeriod } : {}),
         ...(filters.currency ? { currency: filters.currency } : {}),
         ...(filters.maxPrice ? { price: { lte: filters.maxPrice } } : {}),
       },
@@ -161,6 +168,7 @@ export async function getListingById(id: string): Promise<ListingDetail | null> 
       status: listing.status,
       price: Number(listing.price),
       currency: listing.currency,
+      rentPeriod: listing.rentPeriod,
       rooms: listing.rooms,
       areaSqm: listing.areaSqm,
       floor: listing.floor,

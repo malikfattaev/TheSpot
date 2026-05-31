@@ -4,7 +4,7 @@ import { ListingCard } from '@/components/listing-card';
 import { ListingsFilter } from '@/components/listings-filter';
 import { SearchBar } from '@/components/search-bar';
 import { getPublishedListings } from '@/lib/data/listings';
-import { isCurrency, isDistrictKey } from '@/lib/listing-options';
+import { isCurrency, isDistrictKey, isRentPeriod } from '@/lib/listing-options';
 
 export const dynamic = 'force-dynamic';
 
@@ -38,11 +38,13 @@ export default async function HomePage({ searchParams }: HomePageProps) {
   const sp = await searchParams;
   const district = firstValue(sp.district);
   const currency = firstValue(sp.currency);
+  const rentPeriod = firstValue(sp.rentPeriod);
   const listings = await getPublishedListings({
     rooms: toPositiveInt(sp.rooms),
     district: isDistrictKey(district) ? district : undefined,
     maxPrice: toPositiveInt(sp.maxPrice),
     currency: isCurrency(currency) ? currency : undefined,
+    rentPeriod: isRentPeriod(rentPeriod) ? rentPeriod : undefined,
   });
 
   return (
